@@ -1,0 +1,131 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, "Microsoft Yahei", sans-serif; /* 字体 */
+}
+
+body {
+	background-image: url(../img/background-yunwen@width=360.png);
+	margin: 6px 0;
+}
+
+body.white {
+	background-color: #fafcf1;
+}
+
+body.green {
+	background-color: #438a7b;
+}
+
+.wrapper {
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+.header {
+	margin-bottom: 12px;
+	padding: 3px 0;
+	border-bottom: 1px solid #c2c2c2;
+}
+
+.header .logo img {
+	width: 180px;
+}
+
+.form-group {
+	margin: 15px 0;
+}
+
+.form-group .form-input, .form-group .form-textarea {
+	padding: 10px 12px;
+	background-color: #cbdad7;
+}
+
+.form-input label, .form-textarea label {
+	font-size: 16px;
+	color: #a0a0a0;
+}
+
+.form-input input, .form-textarea p {
+	font-size: 16px;
+	color: #747272;
+}
+
+.form-textarea p {
+	margin-top: -3px;
+	line-height: 1.8;
+}
+
+.form-input input{
+	background-color: transparent;
+	border: 0;
+	outline: none;
+}
+
+.form-hint {
+	margin-top: 3px;
+	color: #9c9c9c;
+	font-size: 14px;
+}
+
+.form-textarea {
+	overflow: hidden;
+}
+
+.form-textarea label {
+	float: left;
+}
+
+.form-textarea p {
+	min-height: 7em;
+}
+
+.form-pullbottom {
+	margin-top: 36px;
+}
+
+.btn {
+	display: block;
+	padding: 10px 0;
+	width: 100%;
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	background-color: #38796c;
+	border-radius: 2px;
+}
+
+body.green .btn {
+	background-color: #cbdad7;
+	color: #38796c;
+}
+
+.intro p {
+	color: #9c9c9c;
+	font-size: 14px;
+}
+
+.intro-images {
+	margin: 20px 0;
+	overflow: hidden;
+}
+
+.intro-images > li {
+	float: left;
+	text-align: center;
+	width: 50%;
+}
+
+.intro-images > li > img {
+	width: 92%;
+}
+
+.selections {
+	margin-top: 120px;
+}
+
+.selections > li {
+	margin: 20px 0;
+}
+
+.error {
+	color: #DD9AB6;
+}
