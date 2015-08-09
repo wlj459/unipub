@@ -9,7 +9,7 @@ class Business (models.Model):
     contact = models.CharField(u'联系方式', max_length=100)
     company_name = models.CharField(u'公司名称', max_length=100)
     cooperation_way = models.CharField(u'合作方式', max_length=300)
-    others = models.CharField(u'备注', max_length=300)
+    others = models.CharField(u'备注', max_length=300, blank=True, null=True)
 
     class Meta:
         verbose_name = u'合作'

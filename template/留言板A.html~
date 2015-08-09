@@ -19,10 +19,10 @@
 		<p>UNIPUB独立出版一系列刊物、书籍和视频作品。其中部分内容已在此公众号中推送，喜爱我们的读者，您只需要点击上面的订阅按钮，以后即可通过电子邮箱定期收到我们制作的最新电子刊物</p>
 		<ul class="intro-images">
 			<li>
-				<img src="./img/pic_1.png">
+				<img src="{% static 'img/pic_1.png' %}">
 			</li>
 			<li>
-				<img src="./img/pic_2.png">
+				<img src="{% static 'img/pic_2.png' %}">
 			</li>
 		</ul>
 	</div>

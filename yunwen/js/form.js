@@ -42,14 +42,23 @@ var MyForm = {
 		}
 	},
 	init: function (parameter) {
-		MyForm.parameter = parameter
+
+		MyForm.parameter = parameter;
+
 		var forms = document.querySelectorAll('form');
 		for (var i = 0; i < forms.length; i ++) {
 			forms[i].onsubmit = MyForm.checkForms;
 		}
 	},
+	preprocessingTextarea: function () {
+		var nodes = document.querySelectorAll('.form-textarea p');
+		for (var i = 0; i < nodes.length; i ++) {
+			nodes[i].parentNode.querySelector('input[type=hidden]').value = nodes[i].textContent;
+		}
+	},
 	checkForms: function () {
 		MyForm.clearHint();
+		MyForm.preprocessingTextarea();
 
 		var parameter = MyForm.parameter
 		for (key in parameter) {
