@@ -13,7 +13,7 @@ def business(requests):
             contact=requests.POST['contact'],
             company_name=requests.POST['company_name'],
             cooperation_way=requests.POST['cooperation_way'],
-            others=(requests.POST['others'], ''),
+            others=requests.POST['others'],
         ).save()
         return render_to_response('success.html', "success")
 
@@ -22,7 +22,6 @@ def get_book(requests):
     if requests.method == 'GET':
         return render_to_response('留言板A.html')
     else:
-        print requests.POST['phone_num']
         GetBook.objects.create(
             email=requests.POST['email'],
             phone_num=requests.POST['phone_num'],
