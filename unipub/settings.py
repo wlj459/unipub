@@ -100,4 +100,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR,'yunwen').replace('\\', '/')
+
 STATIC_URL = '/yunwen/'
+STATICFILES_DIRS = (
+    ("css", os.path.join(STATIC_ROOT,'css')),
+    ("js", os.path.join(STATIC_ROOT,'js')),
+    ("img", os.path.join(STATIC_ROOT,'img')),
+)

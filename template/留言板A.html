@@ -1,27 +1,28 @@
 <!DOCTYPE>
+{% load staticfiles %}
 <html>
 <head>
 	<title>留言板</title>
 	<meta charset='utf-8'>
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="./css/reset.css">
-	<link rel="stylesheet" type="text/css" href="./css/base.css">
-	<script type="text/javascript" src="./js/form.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+	<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
 </head>
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
-			<img src="./img/logo.png">
+			<img src="{% static 'img/logo.png' %}">
 		</div>
 	</header>
 	<div class="intro wrapper">
 		<p>UNIPUB独立出版一系列刊物、书籍和视频作品。其中部分内容已在此公众号中推送，喜爱我们的读者，您只需要点击上面的订阅按钮，以后即可通过电子邮箱定期收到我们制作的最新电子刊物</p>
 		<ul class="intro-images">
 			<li>
-				<img src="./img/pic_1.png">
+				<img src="{% static 'img/pic_1.png' %}">
 			</li>
 			<li>
-				<img src="./img/pic_2.png">
+				<img src="{% static 'img/pic_2.png' %}">
 			</li>
 		</ul>
 	</div>

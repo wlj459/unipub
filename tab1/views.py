@@ -12,11 +12,11 @@ def business(requests):
         form = BusinessForm(requests.POST)
         if form.is_valid:
             Business.objects.create(
-                user_name=form['user_name'],
-                contact=form['contact'],
-                company_name=form['company_name'],
-                cooperation_way=form['cooperation_way'],
-                others=form['others'],
+                user_name=requests.POST['user_name'],
+                contact=request.POST['contact'],
+                company_name=request.POST['company_name'],
+                cooperation_way=request.POST['cooperation_way'],
+                others=request.POST['others'],
             ).save()
             return render_to_response('商务合作.html', "success")
         else:
@@ -30,8 +30,8 @@ def get_book(requests):
         form = GetBook(requests.POST)
         if form.is_valid:
             Business.objects.create(
-                email=form.cleaned_data['email'],
-                phone_num=form.cleaned_data['phone_num'],
+                email=request.POST['email'],
+                phone_num=request.POST['phone_num'],
             ).save()
             return render_to_response('留言板A.html', "success")
         else:
@@ -40,15 +40,15 @@ def get_book(requests):
 
 def contact_us(requests):
     if requests.method == 'GET':
-        render_to_response('留言板B.html')
+        return render_to_response('留言板B.html')
     else:
         form = ContactUs(requests.POST)
         if form.is_valid:
             Business.objects.create(
-                email=form.cleaned_data['email'],
-                phone_num=form.cleaned_data['phone_num'],
-                message=form.cleaned_data['message'],
+                email=request.POST['email'],
+                phone_num=request.POST['phone_num'],
+                message=request.POST['message'],
             ).save()
-            render_to_response('留言板B.html', "success")
+            return render_to_response('留言板B.html', "success")
         else:
-            render_to_response('留言板B.html')
+            return render_to_response('留言板B.html')

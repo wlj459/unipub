@@ -1,18 +1,17 @@
 <!DOCTYPE>
-{% load staticfiles %}
 <html>
 <head>
 	<title>留言板</title>
 	<meta charset='utf-8'>
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-	<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="./css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./css/base.css">
+	<script type="text/javascript" src="./js/form.js"></script>
 </head>
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
-			<img src="{% static 'img/logo.png' %}">
+			<img src="./img/logo.png">
 		</div>
 	</header>
 	<form class="form wrapper" action="" method="post">

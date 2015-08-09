@@ -13,7 +13,7 @@
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
-			<img src="{% static 'img/logo.png' %}">
+			<img src="{% static 'img/logo.png' %">
 		</div>
 	</header>
 	<div class="intro wrapper">
