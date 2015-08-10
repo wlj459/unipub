@@ -58,7 +58,6 @@ var MyForm = {
 	},
 	checkForms: function () {
 		MyForm.clearHint();
-		MyForm.preprocessingTextarea();
 
 		var parameter = MyForm.parameter
 		for (key in parameter) {
