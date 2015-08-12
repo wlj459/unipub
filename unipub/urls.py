@@ -18,8 +18,8 @@ from django.contrib import admin
 from tab1.views import *
 
 urlpatterns = [
-    url(r'^admin', include(admin.site.urls)),
-    url(r'^business', business),
-    url(r'^contact_us', contact_us),
-    url(r'^get_book', get_book),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^business/', business),
+    url(r'^contact_us/', contact_us),
+    url(r'^get_book/', get_book),
 ]
