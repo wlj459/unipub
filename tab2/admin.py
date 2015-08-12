@@ -6,16 +6,16 @@ from models import *
 
 
 class ArticleAdmin(admin.ModelAdmin):  # 文章类admin后台显示以及tinymce
-    list_display = ('title', 'show', 'time')
-    fields = ('title', 'show', 'content')
+    list_display = ('title', 'author', 'is_send', 'published')
+    fields = ('title', 'author', 'content')
 
     class Media:
         def __init__(self):
             pass
 
         js = (
-            '/static/js/tinymce/tinymce.min.js',
-            '/static/js/tinymce/config.js',
+            '/yunwen/js/tinymce/tinymce.min.js',
+            '/yunwen/js/tinymce/config.js',
         )
 
 
