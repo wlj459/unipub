@@ -91,22 +91,6 @@ body.green {
 	margin-top: 36px;
 }
 
-.btn {
-	display: block;
-	padding: 10px 0;
-	width: 100%;
-	font-size: 16px;
-	text-align: center;
-	color: #fff;
-	background-color: #38796c;
-	border-radius: 2px;
-}
-
-body.green .btn {
-	background-color: #cbdad7;
-	color: #38796c;
-}
-
 .intro p {
 	color: #9c9c9c;
 	font-size: 14px;
@@ -135,6 +119,137 @@ body.green .btn {
 	margin: 20px 0;
 }
 
+.course-list {
+	margin: 0 -6px;
+}
+
+.course-list > li {
+	padding: 10px 6px;
+	border-bottom: 1px solid #c2c2c2;
+}
+
+.user {
+	margin: 8px 12px;
+	overflow: hidden;
+}
+
+.course-list .user {
+	margin: 0;
+}
+
+.user-photo {
+	float: left;
+	width: 56px;
+}
+
+.user-photo img {
+	width: 100%;
+}
+
+.user-info {
+	margin-left: 62px;
+	padding-top: 20px;
+}
+
+.user-name {
+	font-size: 11px;
+	color: #5f5f5f;
+}
+
+.course-time {
+	font-size: 11px;
+	color: #757575;
+}
+
+.course-title {
+	padding: 0 12px;
+	font-size: 16px;
+	color: #363636;
+}
+
+.course-list .course-title {
+	margin: 12px 0 6px;
+}
+
+.course-preview, .course-content {
+	padding: 0 6px;
+	font-size: 13px;
+	color: #757575;
+	text-indent: 2em;
+	line-height: 1.7;
+}
+
+.course-more {
+	margin-bottom: 4px;
+	font-size: 14px;
+	color: #38796c;
+	text-align: right;
+}
+
+.course-photo {
+	margin: 4px 10px;
+}
+
+.course-photo img {
+	width: 100%;
+}
+
+.course-comment {
+	margin-top: 12px;
+}
+
+.course-comment h3 {
+	padding: 0 12px;
+	margin: 0 -6px;
+	font-size: 14px;
+	color: #3e3e3e;
+	border-bottom: 1px solid #c2c2c2;
+}
+
+.course-comment-list > li {
+	margin: 6px 0 8px;
+}
+
+.course-comment .user-photo {
+	width: 40px;
+}
+
+.course-comment .user-info {
+	margin-left: 0;
+	padding-top: 0;
+}
+
+.course-comment .course-time {
+	float: right;
+	color: #c0c0c0;
+}
+
+.course-comment-text {
+	font-size: 13px;
+	color: #757575;
+	line-height: 1.7;	
+}
+
+.course-comment-right {
+	margin-left: 46px;
+}
+
 .error {
 	color: #DD9AB6;
+}
+
+.btn {
+	display: block;
+	padding: 10px 0;
+	width: 100%;
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	background-color: #38796c;
+	border-radius: 2px;
+}
+
+body.green .btn {
+	background-color: #cbdad7;
+	color: #38796c;
 }
