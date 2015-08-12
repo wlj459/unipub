@@ -1,14 +1,16 @@
-<!DOCTYPE>
+{% extends "base.html" %}
+
 {% load staticfiles %}
-<html>
-<head>
-	<title>留言板</title>
-	<meta charset='utf-8'>
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-	<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
-</head>
+
+{% block title %}
+留言板
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+{% endblock %}
+
+{% block body %}
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
@@ -69,4 +71,4 @@ MyForm.init({
 })
 	</script>
 </body>
-</html>
+{% endblock %}

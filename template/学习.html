@@ -1,13 +1,12 @@
-<!DOCTYPE>
+{% extends "base.html" %}
+
 {% load staticfiles %}
-<html>
-<head>
-	<title>学习</title>
-	<meta charset='utf-8'>
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-</head>
+
+{% block title %}
+学习
+{% endblock %}
+
+{% block body %}
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
@@ -68,4 +67,4 @@
 		</ul>
 	</div>
 </body>
-</html>
+{% endblock %}
