@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+资料
+{% endblock %}
+
+{% block body %}
+<body class="white">
+	<div class="person">
+		<div class="p-head">
+			<div class="p-photo">
+				<img src="{% static 'img/photo.png' %}">
+			</div>
+			<h2 class="p-name">森巴森巴</h2>
+		</div>
+		<ul class="p-nav">
+			<li>
+				<a href="">
+					TA发布的
+				</a>
+			</li>
+			<li class="active">
+				<a href="">
+					TA的资料
+				</a>
+			</li>
+		</ul>
+		<div class="p-info">
+			<div class="form-group">
+				<div class="form-input">
+					<label for="form-nickname">
+						昵称：
+					</label>
+					<span>森巴森巴</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-input">
+					<label for="form-email">
+						邮箱：
+					</label>
+					<span>131@qq.com</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-input">
+					<label for="form-qq">
+						QQ：
+					</label>
+					<span>171412292</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-textarea">
+					<label for="form-intro">
+						个人简介：
+					</label>
+					<p>动感超人动感光波BBBBBB光屁股超人啦啦啦啦美伢你又胖了</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock %}

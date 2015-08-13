@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+个人中心
+{% endblock %}
+
+{% block body %}
+<body class="white">
+	<div class="person">
+		<div class="p-head">
+			<div class="p-photo">
+				<img src="{% static 'img/photo.png' %}">
+			</div>
+			<h2 class="p-name">森巴森巴</h2>
+			<a class="p-edit" href="">修改</a>
+		</div>
+		<ul class="p-nav">
+			<li>
+				<a href="">
+					我发布的
+				</a>
+			</li>
+			<li class="active">
+				<a href="">
+					我的资料
+				</a>
+			</li>
+		</ul>
+		<div class="p-info">
+			<form class="form wrapper" action="" method="post">
+				<div class="form-group">
+					<div class="form-input">
+						<label for="form-nickname">
+							昵称：
+						</label>
+						<input name="email" id="form-nickname" type="text" value="森巴森巴">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-input">
+						<label for="form-email">
+							邮箱：
+						</label>
+						<input name="email" id="form-email" type="text" value="131@qq.com">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-input">
+						<label for="form-qq">
+							QQ：
+						</label>
+						<input name="email" id="form-qq" type="text" value="171412292">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-textarea">
+						<label for="form-intro">
+							个人简介：
+						</label>
+						<textarea name="form-intro">动感超人动感光波BBBBBB光屁股超人啦啦啦啦美伢你又胖了</textarea>
+					</div>
+				</div>
+					<div class="form-submit">
+						<button class="btn" type="submit">
+							保存
+						</button>
+					</div>
+			</form>
+		</div>
+	</div>
+</body>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+资料
+{% endblock %}
+
+{% block body %}
+<body class="white">
+	<div class="person">
+		<div class="p-head">
+			<div class="p-photo">
+				<img src="{% static 'img/photo.png' %}">
+			</div>
+			<h2 class="p-name">森巴森巴</h2>
+		</div>
+		<ul class="p-nav">
+			<li class="active">
+				<a href="">
+					TA发布的
+				</a>
+			</li>
+			<li>
+				<a href="">
+					TA的资料
+				</a>
+			</li>
+		</ul>
+		<p class="no-data">
+			唉哟，暂时没有发布帖子哦~
+		</p>
+	</div>
+</body>
+{% endblock %}

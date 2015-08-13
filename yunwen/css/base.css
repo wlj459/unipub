@@ -4,7 +4,7 @@ body {
 
 body {
 	background-image: url(../img/background-yunwen@width=360.png);
-	margin: 6px 0;
+	margin-bottom: 6px;
 }
 
 body.white {
@@ -21,6 +21,7 @@ body.green {
 }
 
 .header {
+	margin-top: 6px;
 	margin-bottom: 12px;
 	padding: 3px 0;
 	border-bottom: 1px solid #c2c2c2;
@@ -232,6 +233,130 @@ body.green {
 
 .course-comment-right {
 	margin-left: 46px;
+}
+
+.course-del {
+	float: right;
+	color: #d16760;
+}
+
+.p-head {
+	padding: 25px 0;
+	height: 156px;
+	color: #fff;
+	background-color: #38796c;
+}
+
+.p-photo {
+	overflow: hidden;
+	margin: 0 auto;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+}
+
+.p-photo img {
+	width: 100%;
+}
+
+.p-name {
+	margin-top: 10px;
+	font-size: 15px;
+	text-align: center;
+}
+
+.p-edit {
+	float: right;
+	padding-right: 4px;
+	font-size: 12px;
+	line-height: 12px;
+}
+
+.p-nav {
+	height: 26px;
+	color: #dadada;
+	font-size: 12px;
+	text-align: center;
+	background-color: #3f9080;
+}
+
+.p-nav > li {
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	margin-right: 1em;
+}
+
+.p-nav > li:last-child {
+	margin-right: 0;
+}
+
+.p-nav > li.active {
+	color: #fff;
+	border-bottom: 2px solid #e3bfbf;
+}
+
+.p-nav > li > a {
+	display: block;
+	height: 100%;
+}
+
+.person .course-title {
+	margin-top: 0;
+}
+
+.course-type {
+	color: #38796c;
+	font-size: 12px;
+}
+
+.person .course-more {
+	margin-bottom: 0;
+}
+
+.person .course-list > li {
+	padding: 6px;
+}
+
+.p-info {
+	margin-top: 12px;
+}
+
+.p-info .form-group {
+	margin: 0;
+	margin-top: -1px;
+	color: #747272;
+	font-size: 13px;
+	border: 1px solid #c2c2c2;
+}
+
+.p-info .form-group .form-input, .p-info .form-group .form-textarea {
+	padding: 10px 4px;
+	font-size: 13px;
+	background-color: transparent;
+}
+
+.p-info .form-input input, .p-info .form-group textarea {
+	font-size: 13px;
+}
+
+.p-info .form-group label {
+	font-size: 13px;
+}
+
+.p-info .form-submit {
+	margin-top: 12px;
+}
+
+.p-info .form-submit button {
+	padding: 6px 0;
+}
+
+.no-data {
+	margin-top: 30px;
+	color: #38796c;
+	font-size: 12px;
+	text-align: center;
 }
 
 .error {
