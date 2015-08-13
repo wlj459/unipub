@@ -1,12 +1,12 @@
-<!DOCTYPE>
-<html>
-<head>
-	<title>公共课</title>
-	<meta charset='utf-8'>
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="./css/reset.css">
-	<link rel="stylesheet" type="text/css" href="./css/base.css">
-</head>
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+公共课
+{% endblock %}
+
+{% block body %}
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
@@ -71,4 +71,4 @@
 		</div>
 	</div>
 </body>
-</html>
+{% endblock %}
