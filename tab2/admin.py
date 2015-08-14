@@ -20,3 +20,4 @@ class ArticleAdmin(admin.ModelAdmin):  # 文章类admin后台显示以及tinymce
 
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Category)
