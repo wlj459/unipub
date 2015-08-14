@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block title %}
-公共课
+{{article.title}}
 {% endblock %}
 
 {% block body %}
@@ -16,23 +16,20 @@
 	<div class="course wrapper">
 		<h2 class="course-title">
 			<a href="">
-				这里是标题啊野原美伢
+				{{article.title}}
 			</a>
 		</h2>
 		<div class="user">
 			<div class="user-photo">
-				<img src="./img/photo.png">
+				<img src="{% static 'img/photo.png' %}">
 			</div>
 			<div class="user-info">
-				<p class="user-name">啦啦啦动感超人</p>
-				<p class="course-time">2015年7月21日</p>
+				<p class="user-name">{{article.author}}</p>
+				<p class="course-time">{{article.published}}</p>
 			</div>
 		</div>
 		<div class="course-content">
-			动感超人动感光波BBBBBB光屁股超人啦啦啦啦美伢你又胖了
-		</div>
-		<div class="course-photo">
-			<img src="./img/pic_1.png">
+			{{article.content}}
 		</div>
 		<div class="course-comment">
 			<h3>
@@ -41,7 +38,7 @@
 			<ul class="course-comment-list">
 				<li>
 					<div class="user-photo">
-						<img src="./img/photo.png">
+						<img src="{% static 'img/photo.png' %}">
 					</div>
 					<div class="course-comment-right">
 					<p class="user-info">
@@ -55,7 +52,7 @@
 				</li>
 				<li>
 					<div class="user-photo">
-						<img src="./img/photo.png">
+						<img src="{% static 'img/photo.png' %}">
 					</div>
 					<div class="course-comment-right">
 					<p class="user-info">

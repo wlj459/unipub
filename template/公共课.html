@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block title %}
-个人用户
+{{category}}
 {% endblock %}
 
 {% block body %}
@@ -20,7 +20,7 @@
 			<li>
 				<div class="user">
 					<div class="user-photo">
-						<img src="./img/photo.png">
+						<img src="{%static 'img/photo.png' %}">
 					</div>
 					<div class="user-info">
 						<p class="user-name">{{list.author}}</p>
@@ -36,11 +36,12 @@
 					{{list.content}}
 				</p>
 				<p class="course-more">
-					<a href="">
+					<a href="http://127.0.0.1:8000/news/get?id={{list.id}}&category={{category}}">
 						查看全文
 					</a>
 				</p>
 			</li>
+			{% endfor %}
 		</ul>
 	</div>
 </body>
