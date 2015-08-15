@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+企业用户
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<body class="white">
+	<header class="header wrapper">
+		<div class="logo">
+			<img src="{% static 'img/logo.png' %}">
+		</div>
+	</header>
+	<form class="form wrapper" action="" method="get">
+		<div class="form-group">
+			<div class="form-input">
+				<label for="form-companyname">
+					企业名称：
+				</label>
+				<input name="companyName" id="form-companyname" type="text">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-input">
+				<label for="form-email">
+					邮箱：
+				</label>
+				<input name="email" id="form-email" type="text">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-textarea">
+				<label for="form-companyintro">
+					企业介绍：
+				</label>
+				<textarea id="form-companyintro" name="companyIntro"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-submit">
+				<button class="btn" type="submit">
+					提交
+				</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+MyForm.init({
+	'#form-companyname': {
+		'condition': 100,
+		'hintTitle': '企业名称',
+	},
+	'#form-email': {
+		'condition': MyForm.checkEmail,
+		'hintTitle': '邮箱',
+	},
+	'#form-companyintro': {
+		'condition': 300,
+		'hintTitle': '企业介绍',
+	}
+})
+	</script>
+</body>
+{% endblock %}
