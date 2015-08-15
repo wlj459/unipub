@@ -35,7 +35,9 @@
 			</div>
 		</div>
 		<div class="course-content">
+		        {% autoescape off %}
 			{{article.content}}
+		        {% endautoescape %}
 		</div>
 		<div class="course-comment">
 			<h3>
