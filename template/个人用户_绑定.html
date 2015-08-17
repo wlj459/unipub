@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+个人用户
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<body class="white">
+	<header class="header wrapper">
+		<div class="logo">
+			<img src="{% static 'img/logo.png' %}">
+		</div>
+	</header>
+	<form class="form wrapper" action="" method="get">
+		<div class="form-group">
+			<div class="form-input">
+				<label for="form-nickname">
+					昵称：
+				</label>
+				<input name="nickname" id="form-nickname" type="text">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-input">
+				<label for="form-email">
+					邮箱：
+				</label>
+				<input name="email" id="form-email" type="text">
+			</div>
+		</div>
+		<div class="form-group form-pullbottom">
+			<div class="form-submit">
+				<button class="btn" type="submit">
+					提交
+				</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+MyForm.init({
+	'#form-nickname': {
+		'condition': 100,
+		'hintTitle': '昵称',
+	},
+	'#form-email': {
+		'condition': MyForm.checkEmail,
+		'hintTitle': '邮箱',
+	},
+})
+	</script>
+</body>
+{% endblock %}

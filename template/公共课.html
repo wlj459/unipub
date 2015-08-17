@@ -20,10 +20,16 @@
 			<li>
 				<div class="user">
 					<div class="user-photo">
-						<img src="{%static 'img/photo.png' %}">
+						<a href="">
+							<img src="{%static 'img/photo.png' %}">
+						</a>
 					</div>
 					<div class="user-info">
-						<p class="user-name">{{list.author}}</p>
+						<p class="user-name">
+							<a href="">
+								{{list.author}}
+							</a>
+						</p>
 						<p class="course-time">{{list.published}}</p>
 					</div>
 				</div>
@@ -33,7 +39,7 @@
 					</a>
 				</h3>
 				<p class="course-preview">
-					{{list.content}}
+					{{list.summary}}
 				</p>
 				<p class="course-more">
 					<a href="http://120.24.80.78:8077/news/get?id={{list.id}}&category={{category}}">

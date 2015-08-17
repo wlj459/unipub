@@ -21,15 +21,23 @@
 		</h2>
 		<div class="user">
 			<div class="user-photo">
-				<img src="{% static 'img/photo.png' %}">
+				<a href="">
+					<img src="{% static 'img/photo.png' %}">
+				</a>
 			</div>
 			<div class="user-info">
-				<p class="user-name">{{article.author}}</p>
+				<p class="user-name">
+					<a href="">
+						{{article.author}}
+					</a>
+				</p>
 				<p class="course-time">{{article.published}}</p>
 			</div>
 		</div>
 		<div class="course-content">
+		        {% autoescape off %}
 			{{article.content}}
+		        {% endautoescape %}
 		</div>
 <!--		<div class="course-comment">
 			<h3>
@@ -38,11 +46,17 @@
 			<ul class="course-comment-list">
 				<li>
 					<div class="user-photo">
-						<img src="{% static 'img/photo.png' %}">
+						<a href="">
+							<img src="{% static 'img/photo.png' %}">
+						</a>
 					</div>
 					<div class="course-comment-right">
 					<p class="user-info">
-						<span class="user-name">啦啦啦动感超人</span>
+						<span class="user-name">
+							<a href="">
+								啦啦啦动感超人
+							</a>
+						</span>
 						<span class="course-time">2015年7月21日</span>
 					</p>
 					<p class="course-comment-text">
@@ -52,11 +66,17 @@
 				</li>
 				<li>
 					<div class="user-photo">
-						<img src="{% static 'img/photo.png' %}">
+						<a href="">
+							<img src="{% static 'img/photo.png' %}">
+						</a>
 					</div>
 					<div class="course-comment-right">
 					<p class="user-info">
-						<span class="user-name">啦啦啦动感超人</span>
+						<span class="user-name">
+							<a href="">
+								啦啦啦动感超人
+							</a>
+						</span>
 						<span class="course-time">2015年7月21日</span>
 					</p>
 					<p class="course-comment-text">
