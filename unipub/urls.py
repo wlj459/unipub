@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from tab1.views import *
 from tab2.views import *
+from customer.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^get_book/', get_book),
     url(r'^news/time_line', time_line),
     url(r'news/get', get),
+    url(r'customer/get', get_customer),
 ]
