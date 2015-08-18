@@ -33,3 +33,17 @@ class Article(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
 
+
+class Comment(models.Model):
+    author = models.ForeignKey(Customer, verbose_name=u'作者')
+    published = models.DateTimeField(u'发布时间', auto_now=True)
+    article = models.ForeignKey(Article, verbose_name=u'文章')
+    comment = models.TextField(u'评论', max_length=300)
+
+    class Meta:
+        ordering = ['-published']
+        verbose_name = u'评论'
+        verbose_name_plural = u'评论类'
+
+    def __unicode__(self):
+        return u'%s' % self.comment
