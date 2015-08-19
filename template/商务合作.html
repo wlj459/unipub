@@ -61,7 +61,8 @@
 				<label for="form-remark">
 					备注：
 				</label>
-				<textarea id="form-remark" name="others"></textarea>
+				<p contenteditable="true" id="form-remark"></p>
+				<textarea id="form-remark-textarea" name="others"></textarea>
 			</div>
 		</div>
 		<div class="form-group">
@@ -86,11 +87,11 @@ MyForm.init({
 		'condition': 100,
 		'hintTitle': '公司名称',
 	},
-	'#form-companyname': {
+	'#form-cooperation': {
 		'condition': 100,
 		'hintTitle': '合作方向',
 	},
-	'#form-companyname': {
+	'#form-remark': {
 		'condition': 300,
 		'hintTitle': '备注',
 		'beNull': true,

@@ -45,9 +45,19 @@ var MyForm = {
 
 		MyForm.parameter = parameter;
 
+		MyForm.fixStyle();
+
 		var forms = document.querySelectorAll('form');
 		for (var i = 0; i < forms.length; i ++) {
 			forms[i].onsubmit = MyForm.checkForms;
+		}
+	},
+	fixStyle: function () {
+		var nodes = document.querySelectorAll('.form-input input');
+		for (var i = 0; i < nodes.length; i ++) {
+			var width = nodes[i].parentNode.offsetWidth - 24 - 1;
+			width -= document.querySelector('[for=' + nodes[i].id + ']').offsetWidth;
+			nodes[i].style.width = width + 'px';
 		}
 	},
 	preprocessingTextarea: function () {
@@ -64,6 +74,7 @@ var MyForm = {
 			var str = null;
 			if (document.querySelector(key).tagName === 'P') {
 				str = document.querySelector(key).textContent;
+				document.querySelector(key + '-textarea').textContent = str;
 			} else {
 				str = document.querySelector(key).value;
 			}
