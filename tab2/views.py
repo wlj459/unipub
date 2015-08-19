@@ -2,7 +2,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 
-from models import Article, Category
+from models import Article, Category, Comment
 from customer.models import Customer
 
 
@@ -29,7 +29,6 @@ def time_line(requests):
 
 
 def get(requests):
-    # 用户验证
     if requests.method == 'GET':
         open_id = requests.GET['open_id']
         try:
@@ -39,8 +38,14 @@ def get(requests):
         article_id = requests.GET['id']
         try:
             article = Article.objects.get(id=article_id)
-            return render_to_response("公共课_详情.html", {'article': article, 'category': requests.GET['category']})
+            comments = Comment.objects.filter(article=article)
+            return render_to_response("公共课_详情.html",
+                                      {'article': article, 'category': requests.GET['category'], 'comments': comments})
         except ObjectDoesNotExist:
             return render_to_response("error.html")
     else:
         return render_to_response("error.html")
+
+
+def comment(requests):
+    if requests.method ==
