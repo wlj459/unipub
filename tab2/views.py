@@ -12,7 +12,7 @@ def time_line(requests):
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return render_to_response('个人用户绑定.html', {'open_id': open_id})
+            return HttpResponseRedirect('news/customer/customer_bind?open_id=' + str(open_id))
 
         category_name = requests.GET['category']
 

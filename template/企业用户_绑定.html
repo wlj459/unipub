@@ -20,24 +20,32 @@
 	<div class="b-tabs wrapper">
 		<ul>
 			<li class="active">
-				<a href="">
+				<a href="customer/customer_bind?open_id={{open_id}}">
 					个人用户
 				</a>
 			</li>
 			<li>
-				<a href="">
+				<a href="customer/company_bind?open_id={{open_id}}">
 					企业用户
 				</a>
 			</li>
 		</ul>
 	</div>
-	<form class="form wrapper" action="" method="get">
+	<form class="form wrapper" action="" method="post">
 		<div class="form-group">
 			<div class="form-input">
 				<label for="form-companyname">
 					企业名称：
 				</label>
-				<input name="companyName" id="form-companyname" type="text">
+				<input name="name" id="form-companyname" type="text">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-input">
+				<label for="form-num">
+					执照号:
+				</label>
+				<input name="num" id="form-num" type="text">
 			</div>
 		</div>
 		<div class="form-group">
@@ -53,9 +61,10 @@
 				<label for="form-companyintro">
 					企业介绍：
 				</label>
-				<textarea id="form-companyintro" name="companyIntro"></textarea>
+				<textarea id="form-companyintro" name="introduction"></textarea>
 			</div>
 		</div>
+		<input type="hidden" name="open_id" value="{{open_id}}">
 		<div class="form-group">
 			<div class="form-submit">
 				<button class="btn" type="submit">
@@ -70,6 +79,10 @@ MyForm.init({
 		'condition': 100,
 		'hintTitle': '企业名称',
 	},
+	'#form-companyname': {
+        'condition': 100,
+		'hintTitle': '执照号',
+		},
 	'#form-email': {
 		'condition': MyForm.checkEmail,
 		'hintTitle': '邮箱',

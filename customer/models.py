@@ -26,3 +26,9 @@ class Company(models.Model):
     permission = models.BooleanField(u"是否审核", default=False)
     open_id = models.CharField(u'OpenID', max_length=100)
 
+    class Meta:
+        verbose_name = u'企业用户'
+        verbose_name_plural = u'企业用户'
+
+    def __unicode__(self):
+        return u'%s' % self.name

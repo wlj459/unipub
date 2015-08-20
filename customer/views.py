@@ -2,11 +2,12 @@
 from django.shortcuts import render_to_response
 from models import Customer, Company
 from django.core.exceptions import ObjectDoesNotExist
+from tab2.models import Article
 
 
 def bind(requests):
     if requests.method == 'GET':
-        return render_to_response('.html', {'open_id': requests.GET['open_id']})
+        return render_to_response('个人用户_绑定.html', {'open_id': requests.GET['open_id']})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
@@ -27,12 +28,12 @@ def bind(requests):
                     ).save()
                     return render_to_response('success.html', {'open_id': open_id})
         else:
-            return render_to_response('.html')
+            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
 
 
 def company(requests):
-    if requests.method == 'get':
-        return render_to_response('.html', {'open_id': requests.GET['open_id']})
+    if requests.method == 'GET':
+        return render_to_response('企业用户_绑定.html', {'open_id': requests.GET['open_id']})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
@@ -46,7 +47,7 @@ def company(requests):
                     return render_to_response('error.html')
                 except ObjectDoesNotExist:
                     try:
-                        Company.objects.get(openid=open_id)
+                        Company.objects.get(open_id=open_id)
                     except ObjectDoesNotExist:
                         Company.objects.create(
                             name=name,
@@ -57,12 +58,12 @@ def company(requests):
                         ).save()
                         return render_to_response('success.html')
             else:
-                return render_to_response('.html', {'open_id': open_id})
+                return render_to_response('企业用户_绑定.html', {'open_id': open_id})
         else:
-            return render_to_response('.html', {'open_id': open_id})
+            return render_to_response('企业用户_绑定.html', {'open_id': open_id})
 
 
-def get_customer(requests):
+def get_customer_info(requests):
     if requests.method == 'GET':
         customer_id = requests.GET['id']
         open_id = requests.GET['open_id']
@@ -73,7 +74,29 @@ def get_customer(requests):
 
         try:
             customer = Customer.objects.get(id=customer_id)
-            return render_to_response('.html', {'customer': customer, 'user': user})
+            return render_to_response('TA的资料.html', {'customer': customer, 'user': user})
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
+    else:
+        return render_to_response('error.html')
+
+
+def get_customer_articles(requests):
+    if requests.method == 'GET':
+        customer_id = requests.GET['id']
+        open_id = requests.GET['open_id']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
+            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
+
+        try:
+            customer = Customer.objects.get(id=customer_id)
+            articles = Article.objects.filter(author=customer)
+            if len(articles) >0:
+                return render_to_response('TA发布的.html', {'customer': customer, 'user': user, 'articles':articles})
+            else:
+                return render_to_response('TA发布的_无.html', {'customer': customer, 'user': user, 'articles':articles})
         except ObjectDoesNotExist:
             return render_to_response('error.html')
     else:

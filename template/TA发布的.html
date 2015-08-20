@@ -13,59 +13,42 @@
 			<div class="p-photo">
 				<img src="{% static 'img/photo.png' %}">
 			</div>
-			<h2 class="p-name">森巴森巴</h2>
+			<h2 class="p-name">{{customer.name}}</h2>
 		</div>
 		<ul class="p-nav">
 			<li class="active">
-				<a href="">
+				<a href="customer/get/articles?id={{customer.id}}&open_id={{user.open_id}}">
 					TA发布的
 				</a>
 			</li>
 			<li>
-				<a href="">
+				<a href="customer/get/intro?id={{customer.id}}&open_id={{user.open_id}}">
 					TA的资料
 				</a>
 			</li>
 		</ul>
 		<div class="course wrapper">
+			{% for article in articles %}
 			<ul class="course-list">
 				<li>
-					<p class="course-type">公共课</p>
-					<p class="course-time">2015年7月21日</p>
+					<p class="course-type">{{article.category.name}}</p>
+					<p class="course-time">{{article.published}}</p>
 					<h3 class="course-title">
-						<a href="">
-							这里是标题啊野原美伢
+						<a href="news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+							{{article.title}}
 						</a>
 					</h3>
 					<p class="course-preview">
-						据悉微博知名娱乐评论人八哥专用爆料,有张翰的粉丝发微博贬低其前女友郑爽,张翰竟然点了个赞,被发现后取消点赞。引起网友热议。
+						{{article.summary}}
 					</p>
 					<p class="course-more">
-						<a href="">
+						<a href="news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
 							查看全文
 						</a>
 					</p>
 				</li>
 			</ul>
-			<ul class="course-list">
-				<li>
-					<p class="course-type">公共课</p>
-					<p class="course-time">2015年7月21日</p>
-					<h3 class="course-title">
-						<a href="">
-							这里是标题啊野原美伢
-						</a>
-					</h3>
-					<p class="course-preview">
-						据悉微博知名娱乐评论人八哥专用爆料,有张翰的粉丝发微博贬低其前女友郑爽,张翰竟然点了个赞,被发现后取消点赞。引起网友热议。
-					</p>
-					<p class="course-more">
-						<a href="">
-							查看全文
-						</a>
-					</p>
-				</li>
-			</ul>
+			{% endfor %}
 		</div>
 	</div>
 </body>

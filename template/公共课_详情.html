@@ -21,13 +21,13 @@
 		</h2>
 		<div class="user">
 			<div class="user-photo">
-				<a href="http://120.24.80.78:8077/customer/get?id={{article.author.id}}">
+				<a href="customer/get/intro?id={{article.author.id}}&open_id={{user.open_id}}">
 					<img src="{% static 'img/photo.png' %}">
 				</a>
 			</div>
 			<div class="user-info">
 				<p class="user-name">
-					<a href="http://120.24.80.78:8077/customer/get?id={{article.author.id}}">
+					<a href="customer/get/intro?id={{article.author.id}}&open_id={{user.open_id}}">
 						{{article.author.name}}
 					</a>
 				</p>
@@ -39,11 +39,12 @@
 			{{article.content}}
 		        {% endautoescape %}
 		</div>
-<!--		<div class="course-comment">
+		<div class="course-comment">
 			<h3>
 				评论
 			</h3>
 			<ul class="course-comment-list">
+				{% for comment in comments %}
 				<li>
 					<div class="user-photo">
 						<a href="">
@@ -53,39 +54,20 @@
 					<div class="course-comment-right">
 					<p class="user-info">
 						<span class="user-name">
-							<a href="">
-								啦啦啦动感超人
+							<a href="customer/get/intro?id={{comment.author.id}}&open_id={{user.open_id}}">
+								{{comment.user.name}}
 							</a>
 						</span>
-						<span class="course-time">2015年7月21日</span>
+						<span class="course-time">{{comment.published}}</span>
 					</p>
 					<p class="course-comment-text">
-						动感超人动感光波BBBBBB光屁股超人啦啦啦啦美伢你又胖了
+						{{comment.comment}}
 					</p>
 					</div>
 				</li>
-				<li>
-					<div class="user-photo">
-						<a href="">
-							<img src="{% static 'img/photo.png' %}">
-						</a>
-					</div>
-					<div class="course-comment-right">
-					<p class="user-info">
-						<span class="user-name">
-							<a href="">
-								啦啦啦动感超人
-							</a>
-						</span>
-						<span class="course-time">2015年7月21日</span>
-					</p>
-					<p class="course-comment-text">
-						动感超人动感光波BBBBBB光屁股超人啦啦啦啦美伢你又胖了
-					</p>
-					</div>
-				</li>
+				{% endfor %}
 			</ul>
-		</div> -->
+		</div>
 	</div>
 </body>
 {% endblock %}
