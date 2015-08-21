@@ -21,6 +21,7 @@ body.green {
 }
 
 .header {
+	position: relative;
 	margin-top: 6px;
 	margin-bottom: 12px;
 	padding: 3px 0;
@@ -29,6 +30,13 @@ body.green {
 
 .header .logo img {
 	width: 180px;
+}
+
+.header-pc {
+	position: absolute;
+	right: 3;
+	bottom: 0;
+	color: #438a7b;
 }
 
 .form-group {

@@ -6,12 +6,17 @@
 {{article.title}}
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
 			<img src="{% static 'img/logo.png' %}">
 		</div>
+		<a class="header-pc" href="">个人中心</a>
 	</header>
 	<div class="course wrapper">
 		<h2 class="course-title">
@@ -68,6 +73,28 @@
 				{% endfor %}
 			</ul>
 		</div>
+		<form class="form" action="" method="post">
+			<div class="form-group">
+				<div class="form-textarea">
+					<textarea id="form-commenttext" name="message" placeholder="评论内容"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-submit">
+					<button class="btn" type="submit">
+						发表评论
+					</button>
+				</div>
+			</div>
+		</form>
+		<script type="text/javascript">
+MyForm.init({
+	'#form-commenttext': {
+		'condition': 300,
+		'hintTitle': '留言',
+	}
+})
+		</script>
 	</div>
 </body>
 {% endblock %}
