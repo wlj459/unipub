@@ -44,6 +44,8 @@ def get(requests):
         article_id = requests.GET['id']
         try:
             article = Article.objects.get(id=article_id)
+            article.clicks += 1
+            article.save()
             comments = Comment.objects.filter(article=article)
             return render_to_response('公共课_详情.html',
                                       dict(article=article, category=requests.GET['category'], comments=comments,
@@ -83,6 +85,24 @@ def comment(requests):
 
 def create(requests):
     if requests.method == 'GET':
-        return render_to_response('.html', {'open_id': requests.GET['open_id']})
+        return render_to_response('公共课xx.html', {'open_id': requests.GET['open_id']})
     else:
-        pass
+        open_id = requests.POST['open_id']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
+            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
+        title = requests.POST['title']
+        category_name = requests.POST['category']
+        content = requests.POST['content']
+        summary = requests.POST['summary']
+        category = Category.objects.get(name=category_name)
+        Article.objects.create(
+            title=title,
+            category=category,
+            author=user,
+            content=content,
+            summary=summary,
+            is_send=True,
+        ).save()
+        return render_to_response('公共课_详情.html', {'open_id': open_id})

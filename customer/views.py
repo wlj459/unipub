@@ -101,3 +101,30 @@ def get_customer_articles(requests):
             return render_to_response('error.html')
     else:
         return render_to_response('error.html')
+
+
+def change_intro(requests):
+    if requests.method == 'GET':
+        return render_to_response('我的资料_修改.html', {'open_id':requests.GET['open_id']})
+    else:
+        open_id = requests.POST['open_id']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
+            return render_to_response('我的资料_修改.html', {'open_id': open_id})
+        name = (requests.POST['name'], user.name)
+        email = (requests.POST['email'], user.email)
+        qq = (requests.POST['qq'], user.qq)
+        introduction = (requests.POST['introduction'], user.introduction)
+        try:
+            customer = Customer.objects.get(name=name)
+        except ObjectDoesNotExist:
+            customer = None
+        if customer is None or customer.open_id == open_id:
+            user.email = email
+            user.introduction = introduction
+            user.name = name
+            user.qq =qq
+            return render_to_response('我的资料.html', {'open_id': open_id})
+        else:
+            return render_to_response('error.html')
