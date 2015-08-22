@@ -141,3 +141,19 @@ def change_intro(requests):
             return HttpResponseRedirect('customer/get/intro?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         else:
             return render_to_response('error.html')
+
+
+def delete(requests):
+    if requests.method == 'GET':
+        open_id = requests.GET['open_id']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
+	delete_id = requests.GET['id']
+        try:
+            article = Article.objects.get(id=delete_id)
+            article.delete()
+            return HttpResponseRedirect('customer/get/articles?id=' + str(user.id) + '&open_id=' + str(user.open_id))
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
