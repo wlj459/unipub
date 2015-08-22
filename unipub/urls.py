@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'customer/get/articles', get_customer_articles),
     url(r'customer/customer_bind', bind),
     url(r'customer/company_bind', company),
+    url(r'customer/change/intro', change_intro),
 ]

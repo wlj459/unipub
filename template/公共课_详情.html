@@ -76,9 +76,10 @@
 		<form class="form" action="" method="post">
 			<div class="form-group">
 				<div class="form-textarea">
-					<textarea id="form-commenttext" name="message" placeholder="评论内容"></textarea>
+					<textarea id="form-commenttext" name="comment" placeholder="评论内容"></textarea>
 				</div>
 			</div>
+            <input type="hidden" name="open_id" value="{{open_id}}">
 			<div class="form-group">
 				<div class="form-submit">
 					<button class="btn" type="submit">

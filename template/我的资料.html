@@ -13,17 +13,17 @@
 			<div class="p-photo">
 				<img src="{% static 'img/photo.png' %}">
 			</div>
-			<h2 class="p-name">森巴森巴</h2>
-			<a class="p-edit" href="">修改</a>
+			<h2 class="p-name">{{user.name}}</h2>
+			<a class="p-edit" href="customer/change/intro?id={{user.id}}&open_id={{user.open_id}}">修改</a>
 		</div>
 		<ul class="p-nav">
 			<li>
-				<a href="">
+				<a href="customer/get/articles?id={{user.id}}&open_id={{user.open_id}}">
 					我发布的
 				</a>
 			</li>
 			<li class="active">
-				<a href="">
+				<a href="customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">
 					我的资料
 				</a>
 			</li>
@@ -34,7 +34,7 @@
 					<label for="form-nickname">
 						昵称：
 					</label>
-					<span>森巴森巴</span>
+					<span>{{ user.name }}</span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -42,7 +42,7 @@
 					<label for="form-email">
 						邮箱：
 					</label>
-					<span>131@qq.com</span>
+					<span>{{ user.email }}</span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -50,7 +50,7 @@
 					<label for="form-qq">
 						QQ：
 					</label>
-					<span>171412292</span>
+					<span>user.qq</span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -58,7 +58,7 @@
 					<label for="form-intro">
 						个人简介：
 					</label>
-					<p>动感超人动感光波BBBBBB光屁股超人啦啦啦啦美伢你又胖了</p>
+					<p>user.introduction</p>
 				</div>
 			</div>
 		</div>

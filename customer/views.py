@@ -71,12 +71,14 @@ def get_customer_info(requests):
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
             return render_to_response('个人用户_绑定.html', {'open_id': open_id})
-
-        try:
-            customer = Customer.objects.get(id=customer_id)
-            return render_to_response('TA的资料.html', {'customer': customer, 'user': user})
-        except ObjectDoesNotExist:
-            return render_to_response('error.html')
+        if user.id == article_id:
+            return render_to_response('我的资料.html', 'user':user)
+        else:
+            try:
+                customer = Customer.objects.get(id=customer_id)
+                return render_to_response('TA的资料.html', {'customer': customer, 'user': user})
+            except ObjectDoesNotExist:
+                return render_to_response('error.html')
     else:
         return render_to_response('error.html')
 
@@ -89,23 +91,34 @@ def get_customer_articles(requests):
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
             return render_to_response('个人用户_绑定.html', {'open_id': open_id})
-
-        try:
-            customer = Customer.objects.get(id=customer_id)
-            articles = Article.objects.filter(author=customer)
-            if len(articles) >0:
-                return render_to_response('TA发布的.html', {'customer': customer, 'user': user, 'articles':articles})
-            else:
-                return render_to_response('TA发布的_无.html', {'customer': customer, 'user': user, 'articles':articles})
-        except ObjectDoesNotExist:
-            return render_to_response('error.html')
+        if user.id == article_id:
+            try:
+                articles = Article.objects.filter(author=user)
+                return render_to_response('我发布的.html', {'articles': articles, 'user': user)
+            except ObjectDoesNotExist:
+                return render_to_respinse('error.html')
+        else:
+            try:
+                customer = Customer.objects.get(id=customer_id)
+                articles = Article.objects.filter(author=customer)
+                if len(articles) >0:
+                    return render_to_response('TA发布的.html', {'customer': customer, 'user': user, 'articles':articles})
+                else:
+                    return render_to_response('TA发布的_无.html', {'customer': customer, 'user': user, 'articles':articles})
+            except ObjectDoesNotExist:
+                return render_to_response('error.html')
     else:
         return render_to_response('error.html')
 
 
 def change_intro(requests):
     if requests.method == 'GET':
-        return render_to_response('我的资料_修改.html', {'open_id':requests.GET['open_id']})
+        open_id = requests.GET['open_id']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
+            return render_to_response('我的资料_修改.html', {'open_id': open_id})
+        return render_to_response('我的资料_修改.html', {'user': user})
     else:
         open_id = requests.POST['open_id']
         try:
