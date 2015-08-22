@@ -70,7 +70,7 @@ def comment(requests):
                 return render_to_response('error.html')
 
             try:
-                article = Article.objects.get(article_id=article_id)
+                article = Article.objects.get(id=article_id)
             except ObjectDoesNotExist:
                 return render_to_response('error.html')
             Comment.objects.create(
@@ -78,7 +78,7 @@ def comment(requests):
                 article=article,
                 comment=comment_text,
             ).save()
-            return HttpResponseRedirect('news/get?id=' + str(article_id) + '&openid=' + str(open_id))
+            return HttpResponseRedirect('news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + article.category.name)
         else:
             return render_to_response('error.html')
 

@@ -6,9 +6,9 @@ from django.db import models
 class Customer(models.Model):
     name = models.CharField(u'昵称', max_length=100)
     email = models.CharField(u'邮件', max_length=100)
-    qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True)
+    qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
     open_id = models.CharField(u'OpenID', max_length=100)
-    introduction = models.TextField(u'个人介绍', max_length=300, blank=True, null=True)
+    introduction = models.TextField(u'个人介绍', max_length=300, blank=True, null=True, default='')
 
     class Meta:
         verbose_name = u'个人用户'

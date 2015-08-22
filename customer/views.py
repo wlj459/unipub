@@ -71,8 +71,8 @@ def get_customer_info(requests):
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
             return render_to_response('个人用户_绑定.html', {'open_id': open_id})
-        if user.id == article_id:
-            return render_to_response('我的资料.html', 'user':user)
+        if int(user.id) == int(customer_id):
+            return render_to_response('我的资料.html', {'user':user})
         else:
             try:
                 customer = Customer.objects.get(id=customer_id)
@@ -91,10 +91,10 @@ def get_customer_articles(requests):
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
             return render_to_response('个人用户_绑定.html', {'open_id': open_id})
-        if user.id == article_id:
+        if int(user.id) == int(customer_id):
             try:
                 articles = Article.objects.filter(author=user)
-                return render_to_response('我发布的.html', {'articles': articles, 'user': user)
+                return render_to_response('我发布的.html', {'articles': articles, 'user': user})
             except ObjectDoesNotExist:
                 return render_to_respinse('error.html')
         else:
