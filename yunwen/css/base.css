@@ -223,6 +223,7 @@ body.green {
 }
 
 .course-comment-list > li {
+	overflow: hidden;
 	margin: 6px 0 8px;
 }
 

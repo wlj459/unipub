@@ -48,30 +48,30 @@
 			<h3>
 				评论
 			</h3>
-			{% for comment in comments %}
 			<ul class="course-comment-list">
+			{% for comment in comments %}
 				<li>
 					<div class="user-photo">
-					<a href="customer/get/intro?id={{comment.author.id}}&open_id={{user.open_id}}">
+						<a href="customer/get/intro?id={{comment.author.id}}&open_id={{user.open_id}}">
 							<img src="{% static 'img/photo.png' %}">
 						</a>
 					</div>
 					<div class="course-comment-right">
-					<p class="user-info">
-						<span class="user-name">
-							<a href="customer/get/intro?id={{comment.author.id}}&open_id={{user.open_id}}">
-								{{comment.author.name}}
-							</a>
-						</span>
-						<span class="course-time">{{comment.published}}</span>
-					</p>
-					<p class="course-comment-text">
-						{{comment.comment}}
-					</p>
+						<p class="user-info">
+							<span class="user-name">
+								<a href="customer/get/intro?id={{comment.author.id}}&open_id={{user.open_id}}">
+									{{comment.author.name}}
+								</a>
+							</span>
+							<span class="course-time">{{comment.published}}</span>
+						</p>
+						<p class="course-comment-text">
+							{{comment.comment}}
+						</p>
 					</div>
 				</li>
-			</ul>
 			{% endfor %}
+			</ul>
 		</div>
 		<form class="form" action="news/comment" method="post">
 			<div class="form-group">
