@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, HttpResponseRedirect
 from models import Customer, Company
 from django.core.exceptions import ObjectDoesNotExist
 from tab2.models import Article
@@ -124,7 +124,7 @@ def change_intro(requests):
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return render_to_response('我的资料_修改.html', {'open_id': open_id})
+            return render_to_response('error.html')
         name = (requests.POST['name'], user.name)
         email = (requests.POST['email'], user.email)
         qq = (requests.POST['qq'], user.qq)
@@ -138,6 +138,6 @@ def change_intro(requests):
             user.introduction = introduction
             user.name = name
             user.qq =qq
-            return render_to_response('我的资料.html', {'open_id': open_id})
+            return HttpResponseRedirect('customer/get/intro?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         else:
             return render_to_response('error.html')

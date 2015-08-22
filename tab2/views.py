@@ -85,7 +85,7 @@ def comment(requests):
 
 def create(requests):
     if requests.method == 'GET':
-        return render_to_response('公共课xx.html', {'open_id': requests.GET['open_id']})
+        return render_to_response('新建主题.html', {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
     else:
         open_id = requests.POST['open_id']
         try:
@@ -97,12 +97,14 @@ def create(requests):
         content = requests.POST['content']
         summary = requests.POST['summary']
         category = Category.objects.get(name=category_name)
-        Article.objects.create(
+        article = Article.objects.create(
             title=title,
             category=category,
             author=user,
             content=content,
             summary=summary,
             is_send=True,
-        ).save()
-        return render_to_response('公共课_详情.html', {'open_id': open_id})
+        )
+        article.save()
+        return HttpResponseRedirect('news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + article.category.name)
+

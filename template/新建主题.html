@@ -17,13 +17,13 @@
 			<img src="{% static 'img/logo.png' %}">
 		</div>
 	</header>
-	<form class="form wrapper" action="" method="post">
+	<form class="form wrapper" action="news/create" method="post">
 		<div class="form-group">
 			<div class="form-input">
 				<label for="form-title">
 					标题：
 				</label>
-				<input name="tite" id="form-title" type="text">
+				<input name="title" id="form-title" type="text">
 			</div>
 		</div>
         <div class="form-group">
@@ -31,7 +31,7 @@
 				<label for="form-title">
 					简介：
 				</label>
-				<input name="tite" id="form-title" type="text">
+				<input name="summary" id="form-title" type="text">
 			</div>
 		</div>
 		<div class="form-group">
@@ -44,6 +44,7 @@
 			</div>
 		</div>
         <input type="hidden" name="open_id" value="{{open_id}}">
+        <input type="hidden" name="category" value="{{category}}">
 		<div class="form-group">
 			<div class="form-submit">
 				<button class="btn" type="submit">

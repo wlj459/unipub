@@ -14,7 +14,7 @@
 				<img src="{% static 'img/photo.png' %}">
 			</div>
 			<h2 class="p-name">{{ user.name }}</h2>
-			<a class="p-edit" href="">修改</a>
+			<a class="p-edit" href="customer/change/intro?id={{user.id}}&open_id={{user.open_id}}">修改</a>
 		</div>
 		<ul class="p-nav">
 			<li>
@@ -29,7 +29,7 @@
 			</li>
 		</ul>
 		<div class="p-info">
-			<form class="form wrapper" action="" method="post">
+			<form class="form wrapper" action="customer/change/intro" method="post">
 				<div class="form-group">
 					<div class="form-input">
 						<label for="form-nickname">
@@ -62,7 +62,7 @@
 						<textarea name="introduction">{{ user.introduction }}</textarea>
 					</div>
 				</div>
-                <input type="hidden" name="open_id" value="{{open_id}}">
+                <input type="hidden" name="open_id" value="{{user.open_id}}">
 					<div class="form-submit">
 						<button class="btn" type="submit">
 							保存

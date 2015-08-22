@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^get_book/', get_book),
     url(r'^news/time_line', time_line),
     url(r'news/get', get),
+    url(r'news/create', create),
     url(r'news/comment', comment),
     url(r'customer/get/intro', get_customer_info),
     url(r'customer/get/articles', get_customer_articles),
