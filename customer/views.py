@@ -72,7 +72,7 @@ def get_customer_info(requests):
         except ObjectDoesNotExist:
             return render_to_response('个人用户_绑定.html', {'open_id': open_id})
         if int(user.id) == int(customer_id):
-            return render_to_response('我的资料.html', {'user':user})
+            return render_to_response('我的资料.html', {'user': user})
         else:
             try:
                 customer = Customer.objects.get(id=customer_id)
@@ -96,15 +96,16 @@ def get_customer_articles(requests):
                 articles = Article.objects.filter(author=user)
                 return render_to_response('我发布的.html', {'articles': articles, 'user': user})
             except ObjectDoesNotExist:
-                return render_to_respinse('error.html')
+                return render_to_response('error.html')
         else:
             try:
                 customer = Customer.objects.get(id=customer_id)
                 articles = Article.objects.filter(author=customer)
-                if len(articles) >0:
-                    return render_to_response('TA发布的.html', {'customer': customer, 'user': user, 'articles':articles})
+                if len(articles) > 0:
+                    return render_to_response('TA发布的.html', {'customer': customer, 'user': user, 'articles': articles})
                 else:
-                    return render_to_response('TA发布的_无.html', {'customer': customer, 'user': user, 'articles':articles})
+                    return render_to_response('TA发布的_无.html',
+                                              {'customer': customer, 'user': user, 'articles': articles})
             except ObjectDoesNotExist:
                 return render_to_response('error.html')
     else:
@@ -125,10 +126,10 @@ def change_intro(requests):
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
             return render_to_response('error.html')
-        name = (requests.POST['name'], user.name)
-        email = (requests.POST['email'], user.email)
-        qq = (requests.POST['qq'], user.qq)
-        introduction = (requests.POST['introduction'], user.introduction)
+        name = requests.POST['name']
+        email = requests.POST['email']
+        qq = requests.POST['qq']
+        introduction = requests.POST['introduction']
         try:
             customer = Customer.objects.get(name=name)
         except ObjectDoesNotExist:
@@ -137,7 +138,8 @@ def change_intro(requests):
             user.email = email
             user.introduction = introduction
             user.name = name
-            user.qq =qq
+            user.qq = qq
+            user.save()
             return HttpResponseRedirect('customer/get/intro?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         else:
             return render_to_response('error.html')
@@ -150,7 +152,7 @@ def delete(requests):
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
             return render_to_response('error.html')
-	delete_id = requests.GET['id']
+        delete_id = requests.GET['id']
         try:
             article = Article.objects.get(id=delete_id)
             article.delete()
