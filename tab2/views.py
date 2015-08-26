@@ -14,10 +14,10 @@ def time_line(requests):
         except ObjectDoesNotExist:
             return HttpResponseRedirect('news/customer/customer_bind?open_id=' + str(open_id))
 
-        category_name = requests.GET['category']
+        category_id = requests.GET['category']
 
         try:
-            category = Category.objects.get(name=category_name)
+            category = Category.objects.get(id=category_id)
         except ObjectDoesNotExist:
             return render_to_response('error.html')
 
@@ -27,7 +27,7 @@ def time_line(requests):
             return render_to_response('error.html')
 
         lists = lists[0: min(5, len(lists))]
-        return render_to_response('公共课.html', {'lists': lists, 'category': category_name, 'user': user})
+        return render_to_response('公共课.html', {'lists': lists, 'category': category, 'user': user})
     else:
         return render_to_response('error.html')
 
@@ -48,7 +48,7 @@ def get(requests):
             article.save()
             comments = Comment.objects.filter(article=article)
             return render_to_response('公共课_详情.html',
-                                      dict(article=article, category=requests.GET['category'], comments=comments,
+                                      dict(article=article, category=article.category, comments=comments,
                                            user=user))
         except ObjectDoesNotExist:
             return render_to_response('error.html')
@@ -78,7 +78,7 @@ def comment(requests):
                 article=article,
                 comment=comment_text,
             ).save()
-            return HttpResponseRedirect('news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + article.category.name)
+            return HttpResponseRedirect('news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
         else:
             return render_to_response('error.html')
 
@@ -93,10 +93,10 @@ def create(requests):
         except ObjectDoesNotExist:
             return render_to_response('个人用户_绑定.html', {'open_id': open_id})
         title = requests.POST['title']
-        category_name = requests.POST['category']
+        category_id = requests.POST['category']
         content = requests.POST['content']
         summary = requests.POST['summary']
-        category = Category.objects.get(name=category_name)
+        category = Category.objects.get(id=category_id)
         article = Article.objects.create(
             title=title,
             category=category,
@@ -106,5 +106,5 @@ def create(requests):
             is_send=True,
         )
         article.save()
-        return HttpResponseRedirect('news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + article.category.name)
+        return HttpResponseRedirect('news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
 
