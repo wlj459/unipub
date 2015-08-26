@@ -1,7 +1,9 @@
 #-*- coding:utf-8 -*-
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from tab1.models import *
+from customer.models import *
 
 
 def business(requests):
@@ -38,4 +40,20 @@ def contact_us(requests):
             phone_num=requests.POST['phone_num'],
             message=requests.POST['message'],
         ).save()
+        open_id = ''
+        try:
+            open_id = requests.POST['open_id']
+        except:
+            pass
+        try:
+            user = Customer.objects.get(open_id=open_id)
+            user.integral += 5
+            user.save()
+        except ObjectDoesNotExist:
+            try:
+                user = Company.objects.get(open_id=open_id)
+                user.integral += 5
+                user.save()
+            except ObjectDoesNotExist:
+                pass
         return render_to_response('success.html', "success")

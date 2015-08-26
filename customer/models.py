@@ -9,6 +9,7 @@ class Customer(models.Model):
     qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
     open_id = models.CharField(u'OpenID', max_length=100)
     introduction = models.TextField(u'个人介绍', max_length=300, blank=True, null=True, default='')
+    integral = models.IntegerField(u'积分', default=50)
 
     class Meta:
         verbose_name = u'个人用户'
@@ -22,9 +23,11 @@ class Company(models.Model):
     name = models.CharField(u'公司名称', max_length=100)
     email = models.CharField(u"邮箱", max_length=100)
     num = models.CharField(u"工商号", max_length=100)
+    qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
     introduction = models.TextField(u"公司简介", max_length=500)
     permission = models.BooleanField(u"是否审核", default=False)
     open_id = models.CharField(u'OpenID', max_length=100)
+    integral = models.IntegerField(u'积分', default=50)
 
     class Meta:
         verbose_name = u'企业用户'

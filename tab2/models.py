@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from django.db import models
-from customer.models import Customer
+from customer.models import Customer, Company
 
 
 class Category(models.Model):

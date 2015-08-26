@@ -20,12 +20,12 @@
 	<div class="b-tabs wrapper">
 		<ul>
 			<li class="active">
-				<a href="customer/customer_bind?open_id={{open_id}}">
+				<a href="customer/customer_bind?open_id={{open_id}}&category={{category}}">
 					个人用户
 				</a>
 			</li>
 			<li>
-				<a href="customer/company_bind?open_id={{open_id}}">
+				<a href="customer/company_bind?open_id={{open_id}}&category={{category}}">
 					企业用户
 				</a>
 			</li>
@@ -65,6 +65,7 @@
 			</div>
 		</div>
 		<input type="hidden" name="open_id" value="{{open_id}}">
+		<input type="hidden" name="category" value="{{category}}">
 		<div class="form-group">
 			<div class="form-submit">
 				<button class="btn" type="submit">

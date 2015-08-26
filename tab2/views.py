@@ -3,18 +3,23 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response, HttpResponseRedirect
 
 from models import Article, Category, Comment
-from customer.models import Customer
+from customer.models import Customer, Company
 
 
 def time_line(requests):
     if requests.method == 'GET':
         open_id = requests.GET['open_id']
+        category_id = requests.GET['category']
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return HttpResponseRedirect('news/customer/customer_bind?open_id=' + str(open_id))
-
-        category_id = requests.GET['category']
+            try:
+                user = Company.objects.get(open_id=open_id)
+                if not user.permission:
+                    return render_to_response('permission.html', {'open_id': open_id})
+            except ObjectDoesNotExist:
+                return HttpResponseRedirect(
+                    'customer/customer_bind?open_id=' + str(open_id) + '&category=' + category_id)
 
         try:
             category = Category.objects.get(id=category_id)
@@ -35,13 +40,16 @@ def time_line(requests):
 def get(requests):
     if requests.method == 'GET':
         open_id = requests.GET['open_id']
-
+        article_id = requests.GET['id']
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
-
-        article_id = requests.GET['id']
+            try:
+                user = Company.objects.get(open_id=open_id)
+                if not user.permission:
+                    return render_to_response('permission.html', {'open_id': open_id})
+            except ObjectDoesNotExist:
+                return render_to_response('error.html')
         try:
             article = Article.objects.get(id=article_id)
             article.clicks += 1
@@ -78,20 +86,27 @@ def comment(requests):
                 article=article,
                 comment=comment_text,
             ).save()
-            return HttpResponseRedirect('news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
+            return HttpResponseRedirect(
+                'news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
         else:
             return render_to_response('error.html')
 
 
 def create(requests):
     if requests.method == 'GET':
-        return render_to_response('新建主题.html', {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
+        return render_to_response('新建主题.html',
+                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
     else:
         open_id = requests.POST['open_id']
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
+            try:
+                user = Company.objects.get(open_id=open_id)
+                if not user.permission:
+                    return render_to_response('permission.html', {'open_id': open_id})
+            except ObjectDoesNotExist:
+                return render_to_response('error.html')
         title = requests.POST['title']
         category_id = requests.POST['category']
         content = requests.POST['content']
@@ -106,5 +121,5 @@ def create(requests):
             is_send=True,
         )
         article.save()
-        return HttpResponseRedirect('news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
-
+        return HttpResponseRedirect(
+            'news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)

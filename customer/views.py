@@ -7,7 +7,8 @@ from tab2.models import Article
 
 def bind(requests):
     if requests.method == 'GET':
-        return render_to_response('个人用户_绑定.html', {'open_id': requests.GET['open_id']})
+        return render_to_response('个人用户_绑定.html',
+                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
@@ -26,14 +27,16 @@ def bind(requests):
                         email=email,
                         open_id=open_id
                     ).save()
-                    return render_to_response('success.html', {'open_id': open_id})
+                return HttpResponseRedirect(
+                    '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
         else:
-            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
+            return render_to_response('个人用户_绑定.html', {'open_id': open_id, 'category': requests.POST['category']})
 
 
 def company(requests):
     if requests.method == 'GET':
-        return render_to_response('企业用户_绑定.html', {'open_id': requests.GET['open_id']})
+        return render_to_response('企业用户_绑定.html',
+                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
@@ -56,11 +59,13 @@ def company(requests):
                             num=num,
                             introduction=introduction,
                         ).save()
-                        return render_to_response('success.html')
+                        
+                return HttpResponseRedirect(
+                    '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
             else:
-                return render_to_response('企业用户_绑定.html', {'open_id': open_id})
+                return render_to_response('企业用户_绑定.html', {'open_id': open_id, 'category': requests.POST['category']})
         else:
-            return render_to_response('企业用户_绑定.html', {'open_id': open_id})
+            return render_to_response('企业用户_绑定.html', {'open_id': open_id, 'category': requests.POST['category']})
 
 
 def get_customer_info(requests):
@@ -70,7 +75,12 @@ def get_customer_info(requests):
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
+            try:
+                user = Company.objects.get(open_id=open_id)
+                if not user.permission:
+                    return render_to_response('permission.html', {'open_id': open_id})
+            except ObjectDoesNotExist:
+                return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
         if int(user.id) == int(customer_id):
             return render_to_response('我的资料.html', {'user': user})
         else:
@@ -90,7 +100,12 @@ def get_customer_articles(requests):
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
-            return render_to_response('个人用户_绑定.html', {'open_id': open_id})
+            try:
+                user = Company.objects.get(open_id=open_id)
+                if not user.permission:
+                    return render_to_response('permission.html', {'open_id': open_id})
+            except ObjectDoesNotExist:
+                return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
         if int(user.id) == int(customer_id):
             try:
                 articles = Article.objects.filter(author=user)
@@ -118,8 +133,13 @@ def change_intro(requests):
         try:
             user = Customer.objects.get(open_id=open_id)
         except ObjectDoesNotExist:
+            try:
+                user = Company.objects.get(open_id=open_id)
+                if not user.permission:
+                    return render_to_response('permission.html', {'open_id': open_id})
+            except ObjectDoesNotExist:
+                return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
             return render_to_response('我的资料_修改.html', {'open_id': open_id})
-        return render_to_response('我的资料_修改.html', {'user': user})
     else:
         open_id = requests.POST['open_id']
         try:

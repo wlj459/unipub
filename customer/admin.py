@@ -6,5 +6,9 @@ from models import Customer, Company
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'permission')
 
-admin.site.register(Customer)
+
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'integral')
+
+admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Company, CompanyAdmin)
