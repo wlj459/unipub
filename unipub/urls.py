@@ -21,9 +21,9 @@ from customer.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^business/', business),
-    url(r'^contact_us/', contact_us),
-    url(r'^get_book/', get_book),
+    url(r'^business', business),
+    url(r'^contact_us', contact_us),
+    url(r'^get_book', get_book),
     url(r'^news/time_line', time_line),
     url(r'news/get', get),
     url(r'news/delete', delete),
