@@ -4,34 +4,19 @@ from django.db import models
 
 
 class Customer(models.Model):
-    name = models.CharField(u'昵称', max_length=100)
-    email = models.CharField(u'邮件', max_length=100)
-    qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
-    open_id = models.CharField(u'OpenID', max_length=100)
-    introduction = models.TextField(u'个人介绍', max_length=300, blank=True, null=True, default='')
-    integral = models.IntegerField(u'积分', default=50)
-
-    class Meta:
-        verbose_name = u'个人用户'
-        verbose_name_plural = u'个人用户'
-
-    def __unicode__(self):
-        return u'%s' % self.name
-
-
-class Company(models.Model):
-    name = models.CharField(u'公司名称', max_length=100)
+    name = models.CharField(u'名称', max_length=100)
     email = models.CharField(u"邮箱", max_length=100)
-    num = models.CharField(u"工商号", max_length=100)
+    num = models.CharField(u"工商号", max_length=100, default='')
     qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
-    introduction = models.TextField(u"公司简介", max_length=500)
+    introduction = models.TextField(u"简介", max_length=500, blank=True, null=True, default='' )
     permission = models.BooleanField(u"是否审核", default=False)
+    type = models.BooleanField(u"是否是企业用户", default=False)
     open_id = models.CharField(u'OpenID', max_length=100)
     integral = models.IntegerField(u'积分', default=50)
 
     class Meta:
-        verbose_name = u'企业用户'
-        verbose_name_plural = u'企业用户'
+        verbose_name = u'用户'
+        verbose_name_plural = u'用户'
 
     def __unicode__(self):
         return u'%s' % self.name

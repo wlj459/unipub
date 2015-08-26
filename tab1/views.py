@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from tab1.models import *
-from customer.models import *
+from customer.models import Customer
 
 
 def business(requests):
@@ -47,13 +47,9 @@ def contact_us(requests):
             pass
         try:
             user = Customer.objects.get(open_id=open_id)
-            user.integral += 5
-            user.save()
-        except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
+            if user.permission:
                 user.integral += 5
                 user.save()
-            except ObjectDoesNotExist:
-                pass
+        except ObjectDoesNotExist:
+             pass
         return render_to_response('success.html', "success")

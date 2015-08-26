@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render_to_response, HttpResponseRedirect
-from models import Customer, Company
+from models import Customer
 from django.core.exceptions import ObjectDoesNotExist
 from tab2.models import Article
 
@@ -15,17 +15,18 @@ def bind(requests):
         open_id = requests.POST['open_id']
         if name is not None and email is not None and open_id is not None:
             try:
-                Customer.objects.get(name=name)
-                return render_to_response('error.html')
+                Customer.objects.get(open_id=open_id)
+                return render_to_response('error.html', {'content': u'您已经绑定过了~'})
             except ObjectDoesNotExist:
                 try:
-                    Customer.objects.get(open_id=open_id)
-                    return render_to_response('error.html')
+                    Customer.objects.get(name=name)
+                    return render_to_response('error.html', {'content': u'这个昵称有人用过了哦'})
                 except ObjectDoesNotExist:
                     Customer.objects.create(
                         name=name,
                         email=email,
-                        open_id=open_id
+                        open_id=open_id,
+                        permission=True,
                     ).save()
                 return HttpResponseRedirect(
                     '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
@@ -46,18 +47,20 @@ def company(requests):
         if name is not None and email is not None and open_id is not None and num is not None:
             if introduction is not None:
                 try:
-                    Company.objects.get(name=name)
-                    return render_to_response('error.html')
+                    Customer.objects.get(open_id=open_id)
+                    return render_to_response('error.html', {'content': u'您已经注册过了~'})
                 except ObjectDoesNotExist:
                     try:
-                        Company.objects.get(open_id=open_id)
+                        Customer.objects.get(name=name)
+                        return render_to_response('error.html', {'content': u'这个昵称有人用了哦'})
                     except ObjectDoesNotExist:
-                        Company.objects.create(
+                        Customer.objects.create(
                             name=name,
                             email=email,
                             open_id=open_id,
                             num=num,
                             introduction=introduction,
+                            type=True,
                         ).save()
                         
                 return HttpResponseRedirect(
@@ -74,13 +77,10 @@ def get_customer_info(requests):
         open_id = requests.GET['open_id']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
-                if not user.permission:
-                    return render_to_response('permission.html', {'open_id': open_id})
-            except ObjectDoesNotExist:
-                return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
+            return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
         if int(user.id) == int(customer_id):
             return render_to_response('我的资料.html', {'user': user})
         else:
@@ -99,12 +99,9 @@ def get_customer_articles(requests):
         open_id = requests.GET['open_id']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
-                if not user.permission:
-                    return render_to_response('permission.html', {'open_id': open_id})
-            except ObjectDoesNotExist:
                 return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
         if int(user.id) == int(customer_id):
             try:
@@ -132,14 +129,11 @@ def change_intro(requests):
         open_id = requests.GET['open_id']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
-                if not user.permission:
-                    return render_to_response('permission.html', {'open_id': open_id})
-            except ObjectDoesNotExist:
                 return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
-            return render_to_response('我的资料_修改.html', {'open_id': open_id})
+        return render_to_response('我的资料_修改.html', {'open_id': open_id})
     else:
         open_id = requests.POST['open_id']
         try:
@@ -162,7 +156,7 @@ def change_intro(requests):
             user.save()
             return HttpResponseRedirect('customer/get/intro?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         else:
-            return render_to_response('error.html')
+            return render_to_response('error.html', {'content': u'有些信息格式不正确哦'})
 
 
 def delete(requests):
@@ -170,6 +164,8 @@ def delete(requests):
         open_id = requests.GET['open_id']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
             return render_to_response('error.html')
         delete_id = requests.GET['id']

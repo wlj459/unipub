@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response, HttpResponseRedirect
 
 from models import Article, Category, Comment
-from customer.models import Customer, Company
+from customer.models import Customer
 
 
 def time_line(requests):
@@ -12,13 +12,10 @@ def time_line(requests):
         category_id = requests.GET['category']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
-                if not user.permission:
-                    return render_to_response('permission.html', {'open_id': open_id})
-            except ObjectDoesNotExist:
-                return HttpResponseRedirect(
+            return HttpResponseRedirect(
                     'customer/customer_bind?open_id=' + str(open_id) + '&category=' + category_id)
 
         try:
@@ -43,12 +40,9 @@ def get(requests):
         article_id = requests.GET['id']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
-                if not user.permission:
-                    return render_to_response('permission.html', {'open_id': open_id})
-            except ObjectDoesNotExist:
                 return render_to_response('error.html')
         try:
             article = Article.objects.get(id=article_id)
@@ -71,12 +65,13 @@ def comment(requests):
         open_id = requests.POST['open_id']
         article_id = requests.POST['article_id']
         comment_text = requests.POST['comment']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
         if open_id is not None and article_id is not None and comment_text is not None:
-            try:
-                user = Customer.objects.get(open_id=open_id)
-            except ObjectDoesNotExist:
-                return render_to_response('error.html')
-
             try:
                 article = Article.objects.get(id=article_id)
             except ObjectDoesNotExist:
@@ -100,13 +95,10 @@ def create(requests):
         open_id = requests.POST['open_id']
         try:
             user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-            try:
-                user = Company.objects.get(open_id=open_id)
-                if not user.permission:
-                    return render_to_response('permission.html', {'open_id': open_id})
-            except ObjectDoesNotExist:
-                return render_to_response('error.html')
+            return render_to_response('error.html')
         title = requests.POST['title']
         category_id = requests.POST['category']
         content = requests.POST['content']
