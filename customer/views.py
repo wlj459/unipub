@@ -133,7 +133,7 @@ def change_intro(requests):
                 return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
                 return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
-        return render_to_response('我的资料_修改.html', {'open_id': open_id})
+        return render_to_response('我的资料_修改.html', {'open_id': open_id, 'user': user})
     else:
         open_id = requests.POST['open_id']
         try:

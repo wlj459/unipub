@@ -82,7 +82,7 @@ def comment(requests):
                 comment=comment_text,
             ).save()
             return HttpResponseRedirect(
-                'news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
+                'news/get?id=' + str(article_id) + '&open_id=' + str(open_id) + '&category=' + str(article.category.id))
         else:
             return render_to_response('error.html')
 
@@ -114,4 +114,4 @@ def create(requests):
         )
         article.save()
         return HttpResponseRedirect(
-            'news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + article.category.id)
+            'news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + str(article.category.id))
