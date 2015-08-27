@@ -32,7 +32,7 @@ def time_line(requests):
         except ObjectDoesNotExist:
             return render_to_response('error.html')
 
-        lists = lists[0: min(5, len(lists))]
+        #lists = lists[0: min(5, len(lists))]
         return render_to_response('公共课.html', {'lists': lists, 'category': category, 'user': user})
     else:
         return render_to_response('error.html')
