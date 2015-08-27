@@ -5,6 +5,8 @@ from django.shortcuts import render_to_response, HttpResponseRedirect
 from models import Article, Category, Comment
 from customer.models import Customer
 
+id_list = [6, 7, 8]
+
 
 def time_line(requests):
     if requests.method == 'GET':
@@ -16,13 +18,15 @@ def time_line(requests):
                 return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
             return HttpResponseRedirect(
-                    'customer/customer_bind?open_id=' + str(open_id) + '&category=' + category_id)
+                'customer/customer_bind?open_id=' + str(open_id) + '&category=' + category_id)
 
+        if int(category_id) in id_list:
+            if user.integral < 100:
+                return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
         try:
             category = Category.objects.get(id=category_id)
         except ObjectDoesNotExist:
             return render_to_response('error.html')
-
         try:
             lists = Article.objects.filter(category=category, is_send=True).order_by('-published')
         except ObjectDoesNotExist:
@@ -43,12 +47,15 @@ def get(requests):
             if not user.permission:
                 return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-                return render_to_response('error.html')
+            return render_to_response('error.html')
         try:
             article = Article.objects.get(id=article_id)
             article.clicks += 1
             article.save()
             comments = Comment.objects.filter(article=article)
+            if article.category.id in id_list:
+                if user.integral < 100:
+                    return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
             return render_to_response('公共课_详情.html',
                                       dict(article=article, category=article.category, comments=comments,
                                            user=user))
@@ -76,6 +83,9 @@ def comment(requests):
                 article = Article.objects.get(id=article_id)
             except ObjectDoesNotExist:
                 return render_to_response('error.html')
+            if article.category.id in id_list:
+                if user.integral < 100:
+                    return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
             Comment.objects.create(
                 author=user,
                 article=article,
@@ -99,6 +109,10 @@ def create(requests):
                 return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
             return render_to_response('error.html')
+
+        if int (requests.POST['category']) in id_list:
+            if user.integral < 100:
+                return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
         title = requests.POST['title']
         category_id = requests.POST['category']
         content = requests.POST['content']
