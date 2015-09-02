@@ -25,6 +25,7 @@ body.green {
 	margin-top: 6px;
 	margin-bottom: 12px;
 	padding: 3px 0;
+	min-height: 24px;
 	border-bottom: 1px solid #c2c2c2;
 }
 
@@ -32,10 +33,13 @@ body.green {
 	width: 180px;
 }
 
-.header-pc {
+.header .header-pc {
 	position: absolute;
 	right: 3;
 	bottom: 0;
+}
+
+.header-pc {
 	color: #438a7b;
 }
 
@@ -256,9 +260,15 @@ body.green {
 	color: #d16760;
 }
 
+.ajaxloading {
+	margin: 20px 0;
+	text-align: center;
+	color: #666;
+}
+
 .p-head {
-	padding: 25px 0;
-	height: 156px;
+	padding: 22px 0;
+	height: 160px;
 	color: #fff;
 	background-color: #38796c;
 }
@@ -266,8 +276,8 @@ body.green {
 .p-photo {
 	overflow: hidden;
 	margin: 0 auto;
-	width: 80px;
-	height: 80px;
+	width: 74px;
+	height: 74px;
 	border-radius: 50%;
 }
 
@@ -276,9 +286,14 @@ body.green {
 }
 
 .p-name {
-	margin-top: 10px;
 	font-size: 15px;
 	text-align: center;
+}
+
+.p-score {
+	margin-top: 6px;
+	text-align: center;
+	font-size: 12px;
 }
 
 .p-edit {

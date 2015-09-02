@@ -7,7 +7,9 @@
 {% endblock %}
 
 {% block js %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -48,6 +50,22 @@
 			<h3>
 				评论
 			</h3>
+			<form class="form" action="news/comment" method="post">
+				<div class="form-group">
+					<div class="form-textarea">
+						<textarea id="form-commenttext" name="comment" placeholder="评论内容"></textarea>
+					</div>
+				</div>
+				<input type="hidden" name="open_id" value="{{user.open_id}}">
+				<input type="hidden" name="article_id" value="{{article.id}}">
+				<div class="form-group">
+					<div class="form-submit">
+						<button class="btn" type="submit">
+							发表评论
+						</button>
+					</div>
+				</div>
+			</form>
 			<ul class="course-comment-list">
 			{% for comment in comments %}
 				<li>
@@ -72,23 +90,19 @@
 				</li>
 			{% endfor %}
 			</ul>
+			<div class="ajaxloading">
+				<p>加载中……</p>
+			</div>
+			<script type="text/javascript">
+				AjaxLoad.init({
+					targetSelector: ".course-comment-list",
+					ajax: {
+						method: "post",
+						url: "",
+					},
+				});
+			</script>
 		</div>
-		<form class="form" action="news/comment" method="post">
-			<div class="form-group">
-				<div class="form-textarea">
-					<textarea id="form-commenttext" name="comment" placeholder="评论内容"></textarea>
-				</div>
-			</div>
-            <input type="hidden" name="open_id" value="{{user.open_id}}">
-            <input type="hidden" name="article_id" value="{{article.id}}">
-			<div class="form-group">
-				<div class="form-submit">
-					<button class="btn" type="submit">
-						发表评论
-					</button>
-				</div>
-			</div>
-		</form>
 		<script type="text/javascript">
 MyForm.init({
 	'#form-commenttext': {
