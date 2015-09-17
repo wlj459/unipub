@@ -72,6 +72,7 @@ def comment(requests):
         open_id = requests.POST['open_id']
         article_id = requests.POST['article_id']
         comment_text = requests.POST['comment']
+
         try:
             user = Customer.objects.get(open_id=open_id)
             if not user.permission:
@@ -129,3 +130,32 @@ def create(requests):
         article.save()
         return HttpResponseRedirect(
             'news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + str(article.category.id))
+
+
+def get_comment(requests):
+    if requests.method == 'GET':
+        return HttpResponseRedirect('error.html')
+    else:
+        open_id = requests.POST['open_id']
+        article_id = requests.POST['article_id']
+        page_num = requests.POST['page_num']
+
+        try:
+            user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
+        article = Article.objects.get(id=article_id)
+        comments = Comment.objects.filter(article=article)
+        num = len(comments)/5
+        if len(comments) % 5 > 0:
+            num += 1
+        if page_num < num:
+            comments_list = comments[(page_num-1) * 5: page_num * 5 - 1]
+            lastPage = False
+        else:
+            comments_list = comments[(page_num-1)*5:]
+            lastPage = True
+
+        return render_to_response('page-公共课评论.html', {'comments': comments_list, 'lastPage':lastPage})

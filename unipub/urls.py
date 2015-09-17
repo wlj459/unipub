@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'news/delete', delete),
     url(r'news/create', create),
     url(r'news/comment', comment),
+    url(r'news/comment/get', get_comment),
     url(r'customer/get/intro', get_customer_info),
     url(r'customer/get/articles', get_customer_articles),
     url(r'customer/customer_bind', bind),
