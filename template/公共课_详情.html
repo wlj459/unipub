@@ -48,7 +48,7 @@
 		</div>
 		<div class="course-comment">
 			<h3>
-				评论
+				留言
 			</h3>
 			<form class="form" action="news/comment" method="post">
 				<div class="form-group">
@@ -61,7 +61,7 @@
 				<div class="form-group">
 					<div class="form-submit">
 						<button class="btn" type="submit">
-							发表评论
+							发表留言
 						</button>
 					</div>
 				</div>
@@ -76,7 +76,8 @@
 					targetSelector: ".course-comment-list",
 					ajax: {
 						method: "post",
-						url: "",
+						url: "news/comment/get",
+						page_num: {{page_num}},
 					},
 				});
 			</script>

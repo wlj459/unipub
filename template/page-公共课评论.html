@@ -5,6 +5,7 @@
 			<img src="{% static 'img/photo.png' %}">
 		</a>
 	</div>
+    {% for comment in comments %}
 	<div class="course-comment-right">
 		<p class="user-info">
 			<span class="user-name">
@@ -18,6 +19,7 @@
 			{{comment.comment}}
 		</p>
 	</div>
+    {% endfor %}
 	<input type="hidden" name="comment-id" value="{{comment.id}}">
 </li>
 {% endfor %}
