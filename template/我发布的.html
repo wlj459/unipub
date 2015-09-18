@@ -13,7 +13,7 @@
 			<div class="p-photo">
 				<img src="{% static 'img/photo.png' %}">
 			</div>
-			<p class="p-score">积分：2</p>
+			<p class="p-score">积分：{{user.integral}}</p>
 			<h2 class="p-name">{{ user.name }}</h2>
 		</div>
 		<ul class="p-nav">
@@ -30,7 +30,7 @@
 		</ul>
 		<div class="course wrapper">
             {% for article in articles %}
-			<ul class="course-list">
+			 <ul class="course-list">
 				<li>
 					<p class="course-type">{{ article.category.name }}<a class="course-del" href="news/delete?open_id={{user.open_id}}&id={{article.id}}">删除</a></p>
 					<p class="course-time">{{ article.published }}</p>

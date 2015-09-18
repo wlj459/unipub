@@ -133,12 +133,12 @@ def create(requests):
 
 
 def get_comment(requests):
-    if requests.method == 'GET':
-        return HttpResponseRedirect('error.html')
+    if requests.method == 'POST':
+        return render_to_response('error.html')
     else:
-        open_id = requests.POST['open_id']
-        article_id = requests.POST['article_id']
-        page_num = requests.POST['page_num']
+        open_id = requests.GET['open_id']
+        article_id = requests.GET['article_id']
+        page_num = int(requests.GET['page_num'])
 
         try:
             user = Customer.objects.get(open_id=open_id)

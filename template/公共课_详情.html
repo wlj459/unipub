@@ -75,9 +75,8 @@
 				AjaxLoad.init({
 					targetSelector: ".course-comment-list",
 					ajax: {
-						method: "post",
-						url: "news/comment/get",
-						page_num: {{page_num}},
+						method: "get",
+						url: "news/comment/get?article_id={{article.id}}&open_id={{user.open_id}}&page_num=1",
 					},
 				});
 			</script>
