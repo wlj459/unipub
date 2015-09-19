@@ -10,7 +10,7 @@
 <body class="white">
 	<header class="header wrapper">
 		<div class="logo">
-			<img src="{% static 'img/logo.png' %}">
+			<img src="{{category.url}}">
 		</div>
 		<a class="header-pc" href="customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">个人中心</a>
 	</header>

@@ -7,7 +7,7 @@ from models import *
 
 class ArticleAdmin(admin.ModelAdmin):  # 文章类admin后台显示以及tinymce
     list_display = ('title', 'author', 'is_send', 'category', 'published')
-    fields = ('title', 'author', 'category', 'summary', 'is_send', 'content')
+    fields = ('title', 'author', 'add', 'category', 'summary', 'is_send', 'content')
 
     class Media:
         def __init__(self):

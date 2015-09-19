@@ -21,7 +21,7 @@ def time_line(requests):
                 'customer/customer_bind?open_id=' + str(open_id) + '&category=' + category_id)
 
         if int(category_id) in id_list:
-            if user.integral < 100:
+            if user.integral < 200:
                 return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
         try:
             category = Category.objects.get(id=category_id)
@@ -54,7 +54,7 @@ def get(requests):
             article.save()
             comments = Comment.objects.filter(article=article)
             if article.category.id in id_list:
-                if user.integral < 100:
+                if user.integral < 200:
                     return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
             return render_to_response('公共课_详情.html',
                                       dict(article=article, category=article.category, comments=comments,
@@ -85,7 +85,7 @@ def comment(requests):
             except ObjectDoesNotExist:
                 return render_to_response('error.html')
             if article.category.id in id_list:
-                if user.integral < 100:
+                if user.integral < 200:
                     return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
             Comment.objects.create(
                 author=user,
@@ -111,8 +111,8 @@ def create(requests):
         except ObjectDoesNotExist:
             return render_to_response('error.html')
 
-        if int (requests.POST['category']) in id_list:
-            if user.integral < 100:
+        if int(requests.POST['category']) in id_list:
+            if user.integral < 200:
                 return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
         title = requests.POST['title']
         category_id = requests.POST['category']
