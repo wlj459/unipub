@@ -25,7 +25,7 @@ class Article(models.Model):
     content = models.TextField(u'正文')
     clicks = models.IntegerField(u'点击次数', default=0)
     summary = models.CharField(u'文章简介', max_length=300)
-    add = models.CharField(u'广告连接', max_length=300)
+    ad = models.CharField(u'广告连接', max_length=300)
 
     class Meta:
         ordering = ['-published']
