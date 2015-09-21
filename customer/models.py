@@ -3,8 +3,21 @@
 from django.db import models
 
 
+class Head(models.Model):
+    name = models.CharField(u'头像名称', max_length=100)
+    url = models.CharField(u'图片链接', max_length=300)
+
+    class Meta:
+        verbose_name = u'头像'
+        verbose_name_plural = u'头像'
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+
 class Customer(models.Model):
     name = models.CharField(u'名称', max_length=100)
+    head = models.ForeignKey(Head, verbose_name=u'头像', default=None)
     email = models.CharField(u"邮箱", max_length=100)
     num = models.CharField(u"工商号", max_length=100, default='')
     qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
@@ -20,3 +33,4 @@ class Customer(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
+

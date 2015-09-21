@@ -13,6 +13,9 @@ def bind(requests):
         name = requests.POST['name']
         email = requests.POST['email']
         open_id = requests.POST['open_id']
+        # head_id = requests.POST['head']
+        # if head_id is None:
+        #     head_id = 1
         if name is not None and email is not None and open_id is not None:
             try:
                 Customer.objects.get(open_id=open_id)
