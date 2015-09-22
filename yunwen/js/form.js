@@ -45,15 +45,16 @@ var MyForm = {
 
 		MyForm.parameter = parameter;
 
-		MyForm.fixStyle();
+		MyForm.fixStyle('.form-input input');
+		MyForm.fixStyle('.form-selector select');
 
 		var forms = document.querySelectorAll('form');
 		for (var i = 0; i < forms.length; i ++) {
 			forms[i].onsubmit = MyForm.checkForms;
 		}
 	},
-	fixStyle: function () {
-		var nodes = document.querySelectorAll('.form-input input');
+	fixStyle: function (selector) {
+		var nodes = document.querySelectorAll(selector);
 		for (var i = 0; i < nodes.length; i ++) {
 			var width = nodes[i].parentNode.offsetWidth - 24 - 1;
 			width -= document.querySelector('[for=' + nodes[i].id + ']').offsetWidth;
