@@ -1,0 +1,33 @@
+{% for list in lists %}
+<li>
+	<div class="user">
+		<div class="user-photo">
+			<a href="/customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
+				<img src="{%static 'img/photo.png' %}">
+			</a>
+		</div>
+		<div class="user-info">
+			<p class="user-name">
+				<a href="/customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
+					{{list.author.name}}
+				</a>
+			</p>
+			<p class="course-time">{{list.published}}</p>
+		</div>
+	</div>
+	<h3 class="course-title">
+		<a href="">
+			{{list.title}}
+		</a>
+	</h3>
+	<p class="course-preview">
+		{{list.summary}}
+	</p>
+	<p class="course-more">
+		<a href="/news/get?id={{list.id}}&category={{category.id}}&open_id={{user.open_id}}">
+			查看全文
+		</a>
+	</p>
+</li>
+{% endfor %}
+<input type="hidden" name="lastpage" value="{{ lastPage }}">

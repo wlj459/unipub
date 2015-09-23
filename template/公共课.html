@@ -6,6 +6,12 @@
 {{category.name}}
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 <body class="white">
 	<header class="header wrapper">
@@ -17,39 +23,20 @@
 	<div class="course wrapper">
 		<a class="btn" href="/news/create?open_id={{user.open_id}}&category={{category.id}}">新建主题</a>
 		<ul class="course-list">
-			{% for list in lists %}
-			<li>
-				<div class="user">
-					<div class="user-photo">
-						<a href="/customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
-							<img src="{%static 'img/photo.png' %}">
-						</a>
-					</div>
-					<div class="user-info">
-						<p class="user-name">
-							<a href="/customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
-								{{list.author.name}}
-							</a>
-						</p>
-						<p class="course-time">{{list.published}}</p>
-					</div>
-				</div>
-				<h3 class="course-title">
-					<a href="">
-						{{list.title}}
-					</a>
-				</h3>
-				<p class="course-preview">
-					{{list.summary}}
-				</p>
-				<p class="course-more">
-					<a href="/news/get?id={{list.id}}&category={{category.id}}&open_id={{user.open_id}}">
-						查看全文
-					</a>
-				</p>
-			</li>
-			{% endfor %}
 		</ul>
+		<div class="ajaxloading">
+			<p>加载中……</p>
+		</div>
+		<script type="text/javascript">
+			AjaxLoad.init({
+				targetSelector: ".course-list",
+				ajaxLoadText: '.ajaxloading',
+				ajax: {
+					method: "get",
+					url: "/news/time_line/get?open_id={{user.open_id}}",
+				},
+			});
+		</script>
 	</div>
 </body>
 {% endblock %}

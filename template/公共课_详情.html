@@ -74,6 +74,7 @@
 					</div>
 				</div>
 			</form>
+			{% if comments_num %}
 			<ul class="course-comment-list">
 			</ul>
 			<div class="ajaxloading">
@@ -89,6 +90,9 @@
 					},
 				});
 			</script>
+			{% else %}
+			<p>还没有人留言</p>
+			{% endif %}
 		</div>
 		<script type="text/javascript">
 MyForm.init({

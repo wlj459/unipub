@@ -30,9 +30,6 @@ var AjaxLoad = {
 				$(AjaxLoad.parameter.targetSelector).append(html);
 				if (lastPage) {
 					$(AjaxLoad.parameter.ajaxLoadText).remove();
-					if (AjaxLoad.page === 1) {
-						$(AjaxLoad.parameter.targetSelector).prepend('<p>还没有人留言</p>')
-					}
 					AjaxLoad.status = 1;
 				}
 				AjaxLoad.page += 1;
