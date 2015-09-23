@@ -57,12 +57,11 @@
 					<option value="">
 						未选择
 					</option>
-					<option value="1">
-						武汉大学
+					{% for school in schools %}
+					<option value={{school.id}}>
+						{{school.name}}
 					</option>
-					<option value="1">
-						华中科技大学
-					</option>
+					{% endfor %}
 				</select>
 			</div>
 		</div>

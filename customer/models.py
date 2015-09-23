@@ -22,10 +22,13 @@ class School(models.Model):
         verbose_name = u'学校名称'
         verbose_name_plural = u'学校'
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
 
 class Customer(models.Model):
     name = models.CharField(u'名称', max_length=100)
-    head = models.ForeignKey(Head, verbose_name=u'头像', default=None)
+    #head = models.ForeignKey(Head, verbose_name=u'头像', default=None)
     email = models.CharField(u"邮箱", max_length=100)
     School = models.ForeignKey(School, verbose_name=u'学校名称', default=None, blank=True, null=True)
     num = models.CharField(u"工商号", max_length=100, default='')

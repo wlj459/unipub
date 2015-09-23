@@ -47,7 +47,7 @@
 		        {% endautoescape %}
 		</div>
 		<div class="course-info">
-			<p>浏览量：111</p>
+			<p>浏览量：{{article.clicks}}</p>
 		</div>
 		<div class="course-ad">
 			<a href="">
@@ -56,7 +56,7 @@
 		</div>
 		<div class="course-comment">
 			<h3>
-				留言（3）
+				留言（{{comments_num}}）
 			</h3>
 			<form class="form" action="/news/comment" method="post">
 				<div class="form-group">
