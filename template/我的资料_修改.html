@@ -15,22 +15,22 @@
 			</div>
 			<!--<p class="p-score">积分：2</p>-->
 			<h2 class="p-name">{{ user.name }}</h2>
-			<a class="p-edit" href="customer/change/intro?id={{user.id}}&open_id={{user.open_id}}">修改</a>
+			<a class="p-edit" href="/customer/change/intro?id={{user.id}}&open_id={{user.open_id}}">修改</a>
 		</div>
 		<ul class="p-nav">
 			<li>
-				<a href="customer/get/articles?id={{user.id}}&open_id={{user.open_id}}">
+				<a href="/customer/get/articles?id={{user.id}}&open_id={{user.open_id}}">
 					我发布的
 				</a>
 			</li>
 			<li class="active">
-				<a href="customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">
+				<a href="/customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">
 					我的资料
 				</a>
 			</li>
 		</ul>
 		<div class="p-info">
-			<form class="form wrapper" action="customer/change/intro" method="post">
+			<form class="form wrapper" action="/customer/change/intro" method="post">
 				<div class="form-group">
 					<div class="form-input">
 						<label for="form-nickname">
