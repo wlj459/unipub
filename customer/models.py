@@ -22,6 +22,9 @@ class School(models.Model):
         verbose_name = u'学校名称'
         verbose_name_plural = u'学校'
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
 
 class Customer(models.Model):
     name = models.CharField(u'名称', max_length=100)

@@ -1,21 +1,31 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render_to_response, HttpResponseRedirect
-from models import Customer
+from models import Customer, School
 from django.core.exceptions import ObjectDoesNotExist
 from tab2.models import Article
 
 
 def bind(requests):
+    schools = School.objects.all()
     if requests.method == 'GET':
         return render_to_response('个人用户_绑定.html',
-                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
+                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category'],
+                                   'schools': schools})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
         open_id = requests.POST['open_id']
+        school_id = requests.POST['school']
         # head_id = requests.POST['head']
         # if head_id is None:
         #     head_id = 1
+        if school_id is None or len(school_id) == 0:
+            try:
+                school = School.objects.get(id=school_id)
+                integral = 250
+            except ObjectDoesNotExist:
+                school = None
+                integral = 200
         if name is not None and email is not None and open_id is not None:
             try:
                 Customer.objects.get(open_id=open_id)
@@ -30,11 +40,14 @@ def bind(requests):
                         email=email,
                         open_id=open_id,
                         permission=True,
+                        integral=integral,
                     ).save()
                 return HttpResponseRedirect(
                     '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
         else:
-            return render_to_response('个人用户_绑定.html', {'open_id': open_id, 'category': requests.POST['category']})
+            return render_to_response('个人用户_绑定.html',
+                                      {'open_id': open_id, 'category': requests.POST['category'],
+                                       'schools': schools})
 
 
 def company(requests):
@@ -64,8 +77,9 @@ def company(requests):
                             num=num,
                             introduction=introduction,
                             type=True,
+                            integral=200,
                         ).save()
-                        
+
                 return HttpResponseRedirect(
                     '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
             else:
@@ -105,7 +119,7 @@ def get_customer_articles(requests):
             if not user.permission:
                 return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-                return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
+            return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
         if int(user.id) == int(customer_id):
             try:
                 articles = Article.objects.filter(author=user)
@@ -135,7 +149,7 @@ def change_intro(requests):
             if not user.permission:
                 return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
         except ObjectDoesNotExist:
-                return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
+            return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
         return render_to_response('我的资料_修改.html', {'open_id': open_id, 'user': user})
     else:
         open_id = requests.POST['open_id']
