@@ -18,12 +18,12 @@
 		</div>
 		<ul class="p-nav">
 			<li class="active">
-				<a href="customer/get/articles?id={{user.id}}&open_id={{user.open_id}}">
+				<a href="/customer/get/articles?id={{user.id}}&open_id={{user.open_id}}">
 					我发布的
 				</a>
 			</li>
 			<li>
-				<a href="customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">
+				<a href="/customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">
 					我的资料
 				</a>
 			</li>
@@ -32,10 +32,10 @@
             {% for article in articles %}
 			 <ul class="course-list">
 				<li>
-					<p class="course-type">{{ article.category.name }}<a class="course-del" href="news/delete?open_id={{user.open_id}}&id={{article.id}}">删除</a></p>
+					<p class="course-type">{{ article.category.name }}<a class="course-del" href="/news/delete?open_id={{user.open_id}}&id={{article.id}}">删除</a></p>
 					<p class="course-time">{{ article.published }}</p>
 					<h3 class="course-title">
-						<a href="href="news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+						<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
 							{{ article.title }}
 						</a>
 					</h3>
@@ -43,7 +43,7 @@
 						{{ article.summary }}
 					</p>
 					<p class="course-more">
-						<a href="href="news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+						<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
 							查看全文
 						</a>
 					</p>

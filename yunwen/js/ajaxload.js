@@ -30,8 +30,8 @@ var AjaxLoad = {
 				$(AjaxLoad.parameter.targetSelector).append(html);
 				if (lastPage) {
 					$(AjaxLoad.parameter.ajaxLoadText).remove();
-					if ($('.course-comment-list > li').length == 0) {
-						$('.course-comment-list').prepend('<p>还没有人留言</p>')
+					if (AjaxLoad.page === 1) {
+						$(AjaxLoad.parameter.targetSelector).prepend('<p>还没有人留言</p>')
 					}
 					AjaxLoad.status = 1;
 				}

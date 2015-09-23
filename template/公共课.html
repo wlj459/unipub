@@ -12,22 +12,22 @@
 		<div class="logo">
 			<img src="{{category.url}}">
 		</div>
-		<a class="header-pc" href="customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">个人中心</a>
+		<a class="header-pc" href="/customer/get/intro?id={{user.id}}&open_id={{user.open_id}}">个人中心</a>
 	</header>
 	<div class="course wrapper">
-		<a class="btn" href="news/create?open_id={{user.open_id}}&category={{category.id}}">新建主题</a>
+		<a class="btn" href="/news/create?open_id={{user.open_id}}&category={{category.id}}">新建主题</a>
 		<ul class="course-list">
 			{% for list in lists %}
 			<li>
 				<div class="user">
 					<div class="user-photo">
-						<a href="customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
+						<a href="/customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
 							<img src="{%static 'img/photo.png' %}">
 						</a>
 					</div>
 					<div class="user-info">
 						<p class="user-name">
-							<a href="customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
+							<a href="/customer/get/intro?id={{list.author.id}}&open_id={{user.open_id}}">
 								{{list.author.name}}
 							</a>
 						</p>
@@ -43,7 +43,7 @@
 					{{list.summary}}
 				</p>
 				<p class="course-more">
-					<a href="news/get?id={{list.id}}&category={{category.id}}&open_id={{user.open_id}}">
+					<a href="/news/get?id={{list.id}}&category={{category.id}}&open_id={{user.open_id}}">
 						查看全文
 					</a>
 				</p>
