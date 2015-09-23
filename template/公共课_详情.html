@@ -58,7 +58,7 @@
 			<h3>
 				留言（3）
 			</h3>
-			<form class="form" action="news/comment" method="post">
+			<form class="form" action="/news/comment" method="post">
 				<div class="form-group">
 					<div class="form-textarea">
 						<textarea id="form-commenttext" name="comment" placeholder="评论内容"></textarea>
@@ -84,7 +84,7 @@
 					targetSelector: ".course-comment-list",
 					ajax: {
 						method: "get",
-						url: "news/comment/get?article_id={{article.id}}&open_id={{user.open_id}}&page_num=1",
+						url: "/news/comment/get?article_id={{article.id}}&open_id={{user.open_id}}",
 					},
 				});
 			</script>

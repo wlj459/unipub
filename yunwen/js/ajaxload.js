@@ -23,14 +23,19 @@ var AjaxLoad = {
 			method: AjaxLoad.parameter.ajax.method,
 			url: AjaxLoad.parameter.ajax.url,
 			data: {
-				"page": AjaxLoad.page,
+				"page_num": AjaxLoad.page,
 			},
-			success: function(data) {
-				AjaxLoad.page += 1;
-				$(AjaxLoad.parameter.targetSelector).append(data.content);
-				if (data.lastPage) {
+			success: function(html) {
+				var lastPage = html.match(/<input type="hidden" name="lastpage" value="(True|False)">/)[1] == 'True' ? true : false;
+				$(AjaxLoad.parameter.targetSelector).append(html);
+				if (lastPage) {
 					$(AjaxLoad.parameter.ajaxLoadText).remove();
+					if ($('.course-comment-list > li').length == 0) {
+						$('.course-comment-list').prepend('<p>还没有人留言</p>')
+					}
+					AjaxLoad.status = 1;
 				}
+				AjaxLoad.page += 1;
 			},
 			complete: function() {
 				status = 0;
@@ -39,10 +44,9 @@ var AjaxLoad = {
 	},
 	scrollEvent: function () {
 		var scrollTop = $(this).scrollTop();
-		var windowHeight = $(this).height();
+		var windowHeight = this.innerHeight;
 		var scrollHeight = $(document).height();
 
-		console.log(scrollTop, windowHeight, scrollHeight)
 		if(scrollTop + windowHeight >= scrollHeight) {
 			AjaxLoad.loadData();
 		}
