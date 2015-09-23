@@ -16,16 +16,16 @@ def bind(requests):
         email = requests.POST['email']
         open_id = requests.POST['open_id']
         school_id = requests.POST['school']
-        # head_id = requests.POST['head']
-        # if head_id is None:
+        #head_id = requests.POST['head']
+        #if head_id is None:
         #     head_id = 1
+        integral = 200
         if school_id is None or len(school_id) == 0:
             try:
                 school = School.objects.get(id=school_id)
                 integral = 250
             except ObjectDoesNotExist:
                 school = None
-                integral = 200
         if name is not None and email is not None and open_id is not None:
             try:
                 Customer.objects.get(open_id=open_id)

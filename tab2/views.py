@@ -58,7 +58,7 @@ def get(requests):
                     return render_to_response('error.html', {'content': u'您的积分还不够哦，快给我们来信吧'})
             return render_to_response('公共课_详情.html',
                                       dict(article=article, category=article.category, comments=comments,
-                                           user=user))
+                                           user=user, comments_num=len(comments)))
         except ObjectDoesNotExist:
             return render_to_response('error.html')
     else:
@@ -152,7 +152,7 @@ def get_comment(requests):
         if len(comments) % 5 > 0:
             num += 1
         if page_num < num:
-            comments_list = comments[(page_num-1) * 5: page_num * 5 - 1]
+            comments_list = comments[(page_num-1) * 5: page_num * 5]
             lastPage = False
         else:
             comments_list = comments[(page_num-1)*5:]
