@@ -15,10 +15,19 @@ class Head(models.Model):
         return u'%s' % self.name
 
 
+class School(models.Model):
+    name = models.CharField(u'学校名称', max_length=300)
+
+    class Meta:
+        verbose_name = u'学校名称'
+        verbose_name_plural = u'学校'
+
+
 class Customer(models.Model):
     name = models.CharField(u'名称', max_length=100)
     head = models.ForeignKey(Head, verbose_name=u'头像', default=None)
     email = models.CharField(u"邮箱", max_length=100)
+    School = models.ForeignKey(School, verbose_name=u'学校名称', default=None, blank=True, null=True)
     num = models.CharField(u"工商号", max_length=100, default='')
     qq = models.CharField(u'联系方式', max_length=100, blank=True, null=True, default='')
     introduction = models.TextField(u"简介", max_length=500, blank=True, null=True, default='' )
