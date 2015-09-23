@@ -77,6 +77,10 @@ input, button, textarea, select {
 	*font-size: 100%;
 }
 
+input {
+	outline: none;
+}
+
 button {
 	border: 0;
 	cursor: pointer;
