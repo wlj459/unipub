@@ -69,7 +69,7 @@ def get_time_line(requests):
             lastPage = True
         return render_to_response('page-公共课列表.html',
                                   {'lists': lists, 'category': category, 'user': user, 'lists_num': len(lists),
-                                   lastPage: lastPage})
+                                   'lastPage': lastPage})
     else:
         return render_to_response('error.html')
 

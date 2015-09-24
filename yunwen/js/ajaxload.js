@@ -25,6 +25,7 @@ var AjaxLoad = {
 			data: {
 				"page_num": AjaxLoad.page,
 			},
+			dataType: 'html',
 			success: function(html) {
 				var lastPage = html.match(/<input type="hidden" name="lastpage" value="(True|False)">/)[1] == 'True' ? true : false;
 				$(AjaxLoad.parameter.targetSelector).append(html);
