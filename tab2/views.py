@@ -32,8 +32,44 @@ def time_line(requests):
         except ObjectDoesNotExist:
             return render_to_response('error.html')
 
-        #lists = lists[0: min(5, len(lists))]
-        return render_to_response('公共课.html', {'lists': lists, 'category': category, 'user': user})
+        # lists = lists[0: min(5, len(lists))]
+        return render_to_response('公共课.html',
+                                  {'lists': lists, 'category': category, 'user': user, 'lists_num': len(lists)})
+    else:
+        return render_to_response('error.html')
+
+
+def get_time_line(requests):
+    if requests.method == 'GET':
+        open_id = requests.GET['open_id']
+        category_id = requests.GET['category']
+        page_num = int(requests.GET['page_num'])
+        try:
+            user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
+        try:
+            category = Category.objects.get(id=category_id)
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
+        try:
+            lists = Article.objects.filter(category=category, is_send=True).order_by('-published')
+        except ObjectDoesNotExist:
+            return render_to_response('error.html')
+        num = len(lists) / 5
+        if len(lists) % 5 > 0:
+            num += 1
+        if page_num < num:
+            lists = lists[(page_num - 1) * 5: page_num * 5]
+            lastPage = False
+        else:
+            lists = lists[(page_num - 1) * 5:]
+            lastPage = True
+        return render_to_response('page-公共课列表.html',
+                                  {'lists': lists, 'category': category, 'user': user, 'lists_num': len(lists),
+                                   lastPage: lastPage})
     else:
         return render_to_response('error.html')
 
@@ -148,14 +184,14 @@ def get_comment(requests):
             return render_to_response('error.html')
         article = Article.objects.get(id=article_id)
         comments = Comment.objects.filter(article=article)
-        num = len(comments)/5
+        num = len(comments) / 5
         if len(comments) % 5 > 0:
             num += 1
         if page_num < num:
-            comments_list = comments[(page_num-1) * 5: page_num * 5]
+            comments_list = comments[(page_num - 1) * 5: page_num * 5]
             lastPage = False
         else:
-            comments_list = comments[(page_num-1)*5:]
+            comments_list = comments[(page_num - 1) * 5:]
             lastPage = True
 
         return render_to_response('page-公共课评论.html',
