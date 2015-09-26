@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+修改头像
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+.editphoto-img {
+	margin: 0 -6px;
+}
+
+.editphoto-img img {
+	width: 100%
+}
+
+.editphoto-btns {
+	margin-top: 16px;
+}
+
+.editphoto-ajax {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	background-color: #bba76a;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<body class="white">
+	<div class="wrapper">
+		<div class="editphoto-img">
+			<img src="{% static 'img/photo.png' %}">
+		</div>
+		<div class="editphoto-btns">
+			<button class="editphoto-ajax btn">修改头像</button>
+			<a class="btn" href="">保存</a>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+var ajaxStatus = 0;
+$('.editphoto-ajax').click(function () {
+	if (ajaxStatus !== 0) {
+		return false;
+	}
+	ajaxStatus = 1;
+	$.ajax({
+		method: 'get',
+		url: '/userphoto',
+		success: function(data) {
+			$('.editphoto-img img').attr('src', data);
+		},
+		complete: function() {
+			ajaxStatus = 0;
+		}
+	})
+})
+</script>
+{% endblock %}

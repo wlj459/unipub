@@ -8,7 +8,6 @@
 
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
 {% endblock %}
 
@@ -33,7 +32,7 @@
 				ajaxLoadText: '.ajaxloading',
 				ajax: {
 					method: "get",
-					url: "/news/time_line/get?open_id={{user.open_id}}&category={{category.id}}&page_num=1",
+					url: "/news/time_line/get?open_id={{user.open_id}}&category={{category.id}}",
 				},
 			});
 		</script>

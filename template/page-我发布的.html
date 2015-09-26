@@ -1,0 +1,20 @@
+{% load staticfiles %}
+{% for article in articles %}
+<li>
+	<p class="course-type">{{ article.category.name }}<a class="course-del" href="/news/delete?open_id={{user.open_id}}&id={{article.id}}">删除</a></p>
+	<p class="course-time">{{ article.published }}</p>
+	<h3 class="course-title">
+		<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+			{{ article.title }}
+		</a>
+	</h3>
+	<p class="course-preview">
+		{{ article.summary }}
+	</p>
+	<p class="course-more">
+		<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+			查看全文
+		</a>
+	</p>
+</li>
+{% endfor %}

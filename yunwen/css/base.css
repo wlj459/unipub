@@ -121,6 +121,28 @@ body.green {
 	margin-top: 36px;
 }
 
+.form-userphoto {
+	position: relative;
+	width: 300px;
+	height: 150px;
+}
+
+.form-userphoto-img {
+	position: absolute;
+	left: 0;
+	width: 150px;
+}
+
+.form-userphoto-btn.btn {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: 44px;
+	margin: auto 0;
+	width: 120px;
+}
+
 .intro p {
 	color: #9c9c9c;
 	font-size: 14px;

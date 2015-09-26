@@ -6,6 +6,11 @@
 个人中心
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 <body class="white">
 	<div class="person">
@@ -29,27 +34,21 @@
 			</li>
 		</ul>
 		<div class="course wrapper">
-            {% for article in articles %}
-			 <ul class="course-list">
-				<li>
-					<p class="course-type">{{ article.category.name }}<a class="course-del" href="/news/delete?open_id={{user.open_id}}&id={{article.id}}">删除</a></p>
-					<p class="course-time">{{ article.published }}</p>
-					<h3 class="course-title">
-						<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
-							{{ article.title }}
-						</a>
-					</h3>
-					<p class="course-preview">
-						{{ article.summary }}
-					</p>
-					<p class="course-more">
-						<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
-							查看全文
-						</a>
-					</p>
-				</li>
+			<ul class="course-list">
 			</ul>
-			{% endfor %}
+			<div class="ajaxloading">
+				<p>加载中……</p>
+			</div>
+			<script type="text/javascript">
+				AjaxLoad.init({
+					targetSelector: ".course-list",
+					ajaxLoadText: '.ajaxloading',
+					ajax: {
+						method: "get",
+						url: "/news/time_line/get?open_id={{user.open_id}}&category={{category.id}}",
+					},
+				});
+			</script>
 		</div>
 	</div>
 </body>

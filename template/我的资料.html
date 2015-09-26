@@ -15,7 +15,7 @@
 			</div>
 			<p class="p-score">积分：{{user.integral}}</p>
 			<h2 class="p-name">{{user.name}}</h2>
-			<a class="p-edit" href="/customer/change/intro?id={{user.id}}&open_id={{user.open_id}}">修改</a>
+			<a class="p-edit" href="">修改头像</a>
 		</div>
 		<ul class="p-nav">
 			<li>
@@ -60,6 +60,13 @@
 						个人简介：
 					</label>
 					<p>{{user.introduction}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-submit">
+					<a class="btn" href="/customer/change/intro?id={{user.id}}&open_id={{user.open_id}}">
+						修改资料
+					</a>
 				</div>
 			</div>
 		</div>
