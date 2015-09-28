@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response, HttpResponseRedirect
 from models import Article, Category, Comment
 from customer.models import Customer
 
-id_list = [6, 7, 8]
+id_list = [6, 7, 8, 9, 10]
 
 
 def time_line(requests):

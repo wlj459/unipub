@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'news/comment/get$', get_comment),
     url(r'customer/get/intro$', get_customer_info),
     url(r'customer/get/articles$', get_customer_articles),
+    url(r'customer/get/articles/get$', get_customer_articles_get),
     url(r'customer/customer_bind$', bind),
     url(r'customer/company_bind$', company),
     url(r'customer/change/intro$', change_intro),
