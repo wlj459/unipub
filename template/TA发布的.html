@@ -29,27 +29,21 @@
 			</li>
 		</ul>
 		<div class="course wrapper">
-			{% for article in articles %}
 			<ul class="course-list">
-				<li>
-					<p class="course-type">{{article.category.name}}</p>
-					<p class="course-time">{{article.published}}</p>
-					<h3 class="course-title">
-						<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
-							{{article.title}}
-						</a>
-					</h3>
-					<p class="course-preview">
-						{{article.summary}}
-					</p>
-					<p class="course-more">
-						<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
-							查看全文
-						</a>
-					</p>
-				</li>
 			</ul>
-			{% endfor %}
+			<div class="ajaxloading">
+				<p>加载中……</p>
+			</div>
+			<script type="text/javascript">
+				AjaxLoad.init({
+					targetSelector: ".course-list",
+					ajaxLoadText: '.ajaxloading',
+					ajax: {
+						method: "get",
+						url: "/customer/get/articles/get?open_id={{user.open_id}}&id={{user.id}}",
+					},
+				});
+			</script>
 		</div>
 	</div>
 </body>

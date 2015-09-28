@@ -1,0 +1,21 @@
+{% load staticfiles %}
+{% for article in articles %}
+	<li>
+		<p class="course-type">{{article.category.name}}</p>
+		<p class="course-time">{{article.published}}</p>
+		<h3 class="course-title">
+			<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+				{{article.title}}
+			</a>
+		</h3>
+		<p class="course-preview">
+			{{article.summary}}
+		</p>
+		<p class="course-more">
+			<a href="/news/get?id={{article.id}}&category={{article.category.name}}&open_id={{user.open_id}}">
+				查看全文
+			</a>
+		</p>
+	</li>
+{% endfor %}
+<input type="hidden" name="lastpage" value="{{ lastPage }}">

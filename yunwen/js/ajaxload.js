@@ -35,7 +35,7 @@ var AjaxLoad = {
 				}
 				AjaxLoad.page += 1;
 			},
-			complete: function() {
+			complete: function(e) {
 				status = 0;
 			}
 		});

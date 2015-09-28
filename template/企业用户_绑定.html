@@ -9,7 +9,7 @@
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/userphoto.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -68,9 +68,14 @@
 		</div>
 		<div class="form-group">
 			<div class="form-userphoto">
-				<img class="form-userphoto-img" src="{% static 'img/photo.png' %}">
+				<ul class="form-userphoto-data" style="display:none">
+					{% for item in list %}
+					<li data-value="" data-url=""></li>
+					{% endfor %}
+				</ul>
+				<img class="form-userphoto-img" src="">
+				<input id="form-userphoto" type="hidden" name="userphoto" value="">
 				<button class="form-userphoto-btn btn">修改头像</button>
-				<input id="form-userphoto" type="hidden" name="userphoto" value="1">
 			</div>
 		</div>
 		<input type="hidden" name="open_id" value="{{open_id}}">
@@ -103,26 +108,7 @@ MyForm.init({
 	}
 });
 
-var ajaxStatus = 0;
-$('.form-userphoto-btn').click(function () {
-	if (ajaxStatus !== 0) {
-		return false;
-	}
-	ajaxStatus = 1;
-	$.ajax({
-		method: 'get',
-		url: '/userphoto',
-		dataType: 'json',
-		success: function(data) {
-			$('.form-userphoto-img').attr('src', data.url);
-			$('#form-userphoto').val(data.val);
-		},
-		complete: function(data) {
-			ajaxStatus = 0;
-		}
-	});
-	return false;
-})
+UserPhoto.init();
 	</script>
 </body>
 {% endblock %}

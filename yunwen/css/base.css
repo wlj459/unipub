@@ -131,6 +131,7 @@ body.green {
 	position: absolute;
 	left: 0;
 	width: 150px;
+	height: 150px;
 }
 
 .form-userphoto-btn.btn {

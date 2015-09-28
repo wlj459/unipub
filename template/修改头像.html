@@ -8,7 +8,7 @@
 
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/ajaxload.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/userphoto.js' %}"></script>
 {% endblock %}
 
 {% block css %}
@@ -36,32 +36,29 @@
 {% block body %}
 <body class="white">
 	<div class="wrapper">
-		<div class="editphoto-img">
-			<img src="{% static 'img/photo.png' %}">
-		</div>
-		<div class="editphoto-btns">
-			<button class="editphoto-ajax btn">修改头像</button>
-			<a class="btn" href="">保存</a>
-		</div>
+		<form action="" method="post">
+			<ul class="editphoto-data" style="display:none">
+				{% for item in list %}
+				<li data-value="" data-url=""></li>
+				{% endfor %}
+			</ul>				
+			<div class="editphoto-img">
+				<img src="">
+				<input id="editphoto-value" type="hidden" name="userphoto" value="">
+			</div>
+			<div class="editphoto-btns">
+				<button class="editphoto-ajax btn">修改头像</button>
+				<button class="btn" type="submit">保存</button>
+			</div>
+		</form>
 	</div>
 </body>
 <script type="text/javascript">
-var ajaxStatus = 0;
-$('.editphoto-ajax').click(function () {
-	if (ajaxStatus !== 0) {
-		return false;
-	}
-	ajaxStatus = 1;
-	$.ajax({
-		method: 'get',
-		url: '/userphoto',
-		success: function(data) {
-			$('.editphoto-img img').attr('src', data);
-		},
-		complete: function() {
-			ajaxStatus = 0;
-		}
-	})
-})
+UserPhoto.init({
+	dataSelector: '.editphoto-data',
+	imageSelector: '.editphoto-img img',
+	buttonSelector: '.editphoto-ajax',
+	inputSelector: '#editphoto-value',
+});
 </script>
 {% endblock %}
