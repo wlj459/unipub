@@ -165,14 +165,14 @@ def get_customer_articles_get(requests):
             lastPage = True
         if int(user.id) == int(customer_id):
             try:
-                return render_to_response('page-我发布的.html', {'articles': article_list, 'user': user, 'lastpage': lastPage})
+                return render_to_response('page-我发布的.html', {'articles': article_list, 'user': user, 'lastPage': lastPage})
             except ObjectDoesNotExist:
                 return render_to_response('error.html')
         else:
             try:
                 if len(articles) > 0:
                     return render_to_response('TA发布的.html', dict(customer=customer, user=user, articles=article_list,
-                                                                 lastpage=lastPage))
+                                                                 lastPage=lastPage))
                 else:
                     return render_to_response('TA发布的_无.html',
                                               {'customer': customer, 'user': user, 'articles': articles})
