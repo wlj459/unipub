@@ -22,6 +22,9 @@ class Province(models.Model):
         verbose_name = u'省份'
         verbose_name_plural = u'省份'
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
 
 class School(models.Model):
     name = models.CharField(u'学校名称', max_length=300)
