@@ -191,12 +191,17 @@ body.green {
 }
 
 .user-photo {
+	overflow: hidden;
 	float: left;
 	width: 56px;
+	height: 56px;
+	border-radius: 50%;
 }
 
 .user-photo img {
-	width: 100%;
+	bottom: 0;
+	width: 56px;
+	height: 56px;
 }
 
 .user-info {
@@ -332,7 +337,8 @@ body.green {
 }
 
 .p-photo img {
-	width: 100%;
+	width: 74px;
+	height: 74px;
 }
 
 .p-name {

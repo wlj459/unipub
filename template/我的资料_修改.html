@@ -6,6 +6,12 @@
 个人中心
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/userphoto.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 <body class="white">
 	<div class="person">
@@ -59,7 +65,7 @@
 						<label for="form-intro">
 							个人简介：
 						</label>
-						<textarea name="introduction">{{ user.introduction }}</textarea>
+						<textarea id="form-intro" name="introduction">{{ user.introduction }}</textarea>
 					</div>
 				</div>
                 <input type="hidden" name="open_id" value="{{user.open_id}}">
@@ -69,6 +75,28 @@
 						</button>
 					</div>
 			</form>
+			<script type="text/javascript">
+			MyForm.init({
+				'#form-nickname': {
+					'condition': 100,
+					'hintTitle': '昵称',
+				},
+				'#form-email': {
+					'condition': MyForm.checkEmail,
+					'hintTitle': '邮箱',
+				},
+				'#form-qq': {
+					'condition': 100,
+					'hintTitle': 'QQ',
+					'beNull': true,
+				},
+				'#form-intro': {
+					'condition': 300,
+					'hintTitle': '个人简介',
+					'beNull': true,
+				},
+			});
+			</script>
 		</div>
 	</div>
 </body>

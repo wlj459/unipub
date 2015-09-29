@@ -6,6 +6,9 @@ var MyForm = {
 	checkEmail: function (str) {
 		return MyForm.regExpCheck(/^[a-zA-Z0-9]\w+@(\w+.)+[a-z]{2,4}$/, str)
 	},
+	checkQQ: function (str) {
+		return MyForm.regExpCheck(/^[1-9][0-9]{4,9}$/, str)
+	},
 	checkLength: function (str, maxLen) {
 		if (str.length > maxLen) {
 			return false;
