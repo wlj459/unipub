@@ -11,7 +11,7 @@
 	<div class="person">
 		<div class="p-head">
 			<div class="p-photo">
-				<img src="{% static 'img/photo.png' %}">
+				<img src="{{user.head.url}}">
 			</div>
 			<p class="p-score">积分：{{user.integral}}</p>
 			<h2 class="p-name">{{user.name}}</h2>

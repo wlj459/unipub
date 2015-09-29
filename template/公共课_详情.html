@@ -29,7 +29,7 @@
 		<div class="user">
 			<div class="user-photo">
 				<a href="/customer/get/intro?id={{article.author.id}}&open_id={{user.open_id}}">
-					<img src="{% static 'img/photo.png' %}">
+					<img src="{{article.author.head.url}}">
 				</a>
 			</div>
 			<div class="user-info">
@@ -51,7 +51,7 @@
 		</div>
 		<div class="course-ad">
 			<a href="">
-				<img src="{{article.ad}}">
+				<img src="{{article.ad}}>
 			</a>
 		</div>
 		<div class="course-comment">
