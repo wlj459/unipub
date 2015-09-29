@@ -26,7 +26,7 @@ def time_line(requests):
         try:
             category = Category.objects.get(id=category_id)
         except ObjectDoesNotExist:
-            return render_to_response('error.html')
+            return render_to_response('error.html', {'content': u'您访问的分类有错误哦~'})
         try:
             lists = Article.objects.filter(category=category, is_send=True).order_by('-published')
         except ObjectDoesNotExist:

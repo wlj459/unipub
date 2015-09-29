@@ -71,7 +71,7 @@
 			<div class="form-userphoto">
 				<ul class="form-userphoto-data" style="display:none">
 					{% for item in list %}
-					<li data-value="" data-url=""></li>
+					<li data-value="{{item.id}}" data-url="{{item.url}}"></li>
 					{% endfor %}
 				</ul>
 				<img class="form-userphoto-img" src="">

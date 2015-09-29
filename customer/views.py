@@ -1,31 +1,34 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render_to_response, HttpResponseRedirect
-from models import Customer, School
+from models import Customer, School, Head
 from django.core.exceptions import ObjectDoesNotExist
 from tab2.models import Article
 
 
 def bind(requests):
     schools = School.objects.all()
+    lists = Head.objects.all()
     if requests.method == 'GET':
         return render_to_response('个人用户_绑定.html',
                                   {'open_id': requests.GET['open_id'], 'category': requests.GET['category'],
-                                   'schools': schools})
+                                   'schools': schools, 'list': lists})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
         open_id = requests.POST['open_id']
         school_id = requests.POST['school']
-        # head_id = requests.POST['head']
-        # if head_id is None:
-        #     head_id = 1
+        head_id = requests.POST['userphoto']
         integral = 200
-        if school_id is None or len(school_id) == 0:
+        print school_id
+        print len(school_id)
+        if school_id is not None and len(school_id) != 0:
             try:
                 school = School.objects.get(id=school_id)
                 integral = 250
             except ObjectDoesNotExist:
                 school = None
+        else:
+            school = None
         if name is not None and email is not None and open_id is not None:
             try:
                 Customer.objects.get(open_id=open_id)
@@ -35,31 +38,40 @@ def bind(requests):
                     Customer.objects.get(name=name)
                     return render_to_response('error.html', {'content': u'这个昵称有人用过了哦'})
                 except ObjectDoesNotExist:
+                    try:
+                        head = Head.objects.get(id=head_id)
+                    except ObjectDoesNotExist:
+                        return render_to_response('error.html', {'content': u'还没有选择头像哦'})
                     Customer.objects.create(
                         name=name,
                         email=email,
                         open_id=open_id,
                         permission=True,
                         integral=integral,
+                        head=head,
+                        school=school,
                     ).save()
                 return HttpResponseRedirect(
                     '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
         else:
             return render_to_response('个人用户_绑定.html',
                                       {'open_id': open_id, 'category': requests.POST['category'],
-                                       'schools': schools})
+                                       'schools': schools, 'list': lists})
 
 
 def company(requests):
+    lists = Head.objects.all()
     if requests.method == 'GET':
         return render_to_response('企业用户_绑定.html',
-                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
+                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category'],
+                                   'list': lists})
     else:
         name = requests.POST['name']
         email = requests.POST['email']
         num = requests.POST['num']
         open_id = requests.POST['open_id']
         introduction = requests.POST['introduction']
+        head_id = requests.POST['userphoto']
         if name is not None and email is not None and open_id is not None and num is not None:
             if introduction is not None:
                 try:
@@ -70,6 +82,10 @@ def company(requests):
                         Customer.objects.get(name=name)
                         return render_to_response('error.html', {'content': u'这个昵称有人用了哦'})
                     except ObjectDoesNotExist:
+                        try:
+                            head = Head.objects.get(id=head_id)
+                        except ObjectDoesNotExist:
+                            return render_to_response('error.html', {'content': u'你还没有选择头像哦'})
                         Customer.objects.create(
                             name=name,
                             email=email,
@@ -78,14 +94,17 @@ def company(requests):
                             introduction=introduction,
                             type=True,
                             integral=200,
+                            head=head,
                         ).save()
 
                 return HttpResponseRedirect(
                     '/news/time_line?open_id=' + str(open_id) + '&category=' + requests.POST['category'])
             else:
-                return render_to_response('企业用户_绑定.html', {'open_id': open_id, 'category': requests.POST['category']})
+                return render_to_response('企业用户_绑定.html',
+                                          {'open_id': open_id, 'category': requests.POST['category'], 'list': lists})
         else:
-            return render_to_response('企业用户_绑定.html', {'open_id': open_id, 'category': requests.POST['category']})
+            return render_to_response('企业用户_绑定.html',
+                                      {'open_id': open_id, 'category': requests.POST['category'], 'list': lists})
 
 
 def get_customer_info(requests):
