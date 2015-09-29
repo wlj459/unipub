@@ -15,8 +15,17 @@ class Head(models.Model):
         return u'%s' % self.name
 
 
+class Province(models.Model):
+    name = models.CharField(u'省份名称', max_length=300)
+
+    class Meta:
+        verbose_name = u'省份'
+        verbose_name_plural = u'省份'
+
+
 class School(models.Model):
     name = models.CharField(u'学校名称', max_length=300)
+    province = models.ForeignKey(Province, verbose_name=u'省份', default=None)
 
     class Meta:
         verbose_name = u'学校名称'

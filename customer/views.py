@@ -1,8 +1,9 @@
 # -*- coding:utf-8 -*-
-from django.shortcuts import render_to_response, HttpResponseRedirect
-from models import Customer, School, Head
+from django.shortcuts import render_to_response, HttpResponseRedirect, HttpResponse
+from models import Customer, School, Head, Province
 from django.core.exceptions import ObjectDoesNotExist
 from tab2.models import Article
+from json import dumps
 
 
 def bind(requests):
@@ -282,3 +283,41 @@ def delete(requests):
             return HttpResponseRedirect('/customer/get/articles?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         except ObjectDoesNotExist:
             return render_to_response('error.html')
+
+
+def get_province(requests):
+    if requests.method == 'POST':
+        status = '1'
+        lists = []
+    else:
+        lists = Province.objects.all()
+        provinces = []
+        for i in lists:
+            provinces.append({'id': i.id, 'province': i.name})
+        status = '0'
+    return HttpResponse(dumps({'list': provinces, 'status': status}, ensure_ascii=False),
+                        content_type='application/json')
+
+
+def get_school(requests):
+    if requests.method == 'POST':
+        status = '1'
+        lists = []
+    else:
+        province_id = requests.GET['province']
+        if province_id is not None and len(province_id) > 0:
+            try:
+                province = Province.objects.get(id=province_id)
+            except ObjectDoesNotExist:
+                status = '1'
+                lists = []
+                return dumps({'list': lists, 'status': status})
+            lists = School.objects.filter(province=province)
+            schools = []
+            for i in lists:
+                schools.append({'id': i.id, 'school': i.name})
+            status = '0'
+        else:
+            status = '1'
+            lists = []
+    return HttpResponse(dumps({'list': schools, 'status': status}, ensure_ascii=False), content_type='application/json')

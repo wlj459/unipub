@@ -38,4 +38,6 @@ urlpatterns = [
     url(r'customer/company_bind$', company),
     url(r'customer/change/intro$', change_intro),
     url(r'customer/change/head$', change_head),
+    url(r'school/get/province$', get_province),
+    url(r'school/get/school$', get_school),
 ]
