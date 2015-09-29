@@ -36,16 +36,17 @@
 {% block body %}
 <body class="white">
 	<div class="wrapper">
-		<form action="" method="post">
+		<form action="/customer/change/head" method="post">
 			<ul class="editphoto-data" style="display:none">
 				{% for item in list %}
-				<li data-value="" data-url=""></li>
+				<li data-value="{{item.id}}" data-url="{{item.url}}"></li>
 				{% endfor %}
 			</ul>				
 			<div class="editphoto-img">
 				<img src="">
 				<input id="editphoto-value" type="hidden" name="userphoto" value="">
 			</div>
+			<input type="hidden" name="open_id" value="{{user.open_id}}">
 			<div class="editphoto-btns">
 				<button class="editphoto-ajax btn">修改头像</button>
 				<button class="btn" type="submit">保存</button>

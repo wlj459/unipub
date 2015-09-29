@@ -238,6 +238,34 @@ def change_intro(requests):
             return render_to_response('error.html', {'content': u'有些信息格式不正确哦'})
 
 
+def change_head(requests):
+    lists = Head.objects.all()
+    if requests.method == 'GET':
+        open_id = requests.GET['open_id']
+        print open_id
+        try:
+            user = Customer.objects.get(open_id=open_id)
+            if not user.permission:
+                return render_to_response('error.html', {'content': u'您还没有权限，请等待管理员审批'})
+        except ObjectDoesNotExist:
+            return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
+        return render_to_response('修改头像.html', {'open_id': open_id, 'user': user, 'list': lists})
+    else:
+        open_id = requests.POST['open_id']
+        try:
+            user = Customer.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
+            return HttpResponseRedirect('customer/customer_bind?open_id=' + str(open_id))
+        head_id = requests.POST['userphoto']
+        try:
+            head = Head.objects.get(id=head_id)
+        except ObjectDoesNotExist:
+            return render_to_response('error.html', {'content': u'还没有选择头像哦'})
+        user.head = head
+        user.save()
+        return HttpResponseRedirect('/customer/get/intro?id=' + str(user.id) + '&open_id=' + str(user.open_id))
+
+
 def delete(requests):
     if requests.method == 'GET':
         open_id = requests.GET['open_id']
@@ -251,6 +279,6 @@ def delete(requests):
         try:
             article = Article.objects.get(id=delete_id)
             article.delete()
-            return HttpResponseRedirect('customer/get/articles?id=' + str(user.id) + '&open_id=' + str(user.open_id))
+            return HttpResponseRedirect('/customer/get/articles?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         except ObjectDoesNotExist:
             return render_to_response('error.html')
