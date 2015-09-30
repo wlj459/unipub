@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='school',
             name='province',
-            field=models.ForeignKey(default=None, verbose_name='\u7701\u4efd', to='customer.Province'),
+            field=models.ForeignKey(default=None, verbose_name='\u7701\u4efd', to='customer.Province', blank=True, null= True),
         ),
     ]
