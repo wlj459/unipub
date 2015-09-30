@@ -28,7 +28,7 @@ class Province(models.Model):
 
 class School(models.Model):
     name = models.CharField(u'学校名称', max_length=300)
-    province = models.ForeignKey(Province, verbose_name=u'省份', default=None)
+    province = models.ForeignKey(Province, verbose_name=u'省份', default=None, blank=True, null=True)
 
     class Meta:
         verbose_name = u'学校名称'
@@ -40,7 +40,7 @@ class School(models.Model):
 
 class Customer(models.Model):
     name = models.CharField(u'名称', max_length=100)
-    head = models.ForeignKey(Head, verbose_name=u'头像', default=None)
+    head = models.ForeignKey(Head, verbose_name=u'头像', default=None, blank=True, null=True)
     email = models.CharField(u"邮箱", max_length=100)
     school = models.ForeignKey(School, verbose_name=u'学校名称', default=None, blank=True, null=True)
     num = models.CharField(u"工商号", max_length=100, default='')
