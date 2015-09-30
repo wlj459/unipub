@@ -52,18 +52,25 @@
 		</div>
 		<div class="form-group">
 			<div class="form-selector">
+				<label for="form-province">
+					省份：
+				</label>
+				<select id="form-province" name="province">
+					<option data-value="0">
+						未选择
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-selector">
 				<label for="form-school">
 					学校：
 				</label>
 				<select id="form-school" name="school">
-					<option value="">
+					<option data-value="0">
 						未选择
 					</option>
-					{% for school in schools %}
-					<option value={{school.id}}>
-						{{school.name}}
-					</option>
-					{% endfor %}
 				</select>
 			</div>
 		</div>
@@ -106,6 +113,71 @@ MyForm.init({
 });
 
 UserPhoto.init();
+
+var SelectSchool = {
+	parameter: {
+		provinceSelector: '#form-province',
+		schoolSelector: '#form-school',
+	},
+	init: function(parameter) {
+		$.extend(SelectSchool.parameter, parameter);
+
+		$.ajax({
+			method: 'get',
+			url: '/school/get/province',
+			dataType: 'json',
+			success: function(json) {
+				if (json.status !== '0') {
+					console.log('error', json.status);
+					return false;
+				}
+				var list = json.list
+				var html = '';
+				for (var i = 0; i < list.length; i ++) {
+					html += '<option value="' + list[i].id + '">' + list[i].province + '</option>';
+				}
+				$(SelectSchool.parameter.provinceSelector).append(html);
+
+				$(SelectSchool.parameter.provinceSelector).change(function () {
+					var value = $(this).select().val();
+					console.log(value);
+					if (value === '0') {
+						$(SelectSchool.parameter.schoolSelector).html('<option data-value="0">未选择</option>')
+					} else {
+						$.ajax({
+							method: 'get',
+							url: '/school/get/school',
+							data: {
+								'province': value,
+							},
+							dataType: 'json',
+							success: function(json) {
+								console.log(json);
+								if (json.status !== '0') {
+									console.log('error', json.status);
+									return false;
+								}
+								var list = json.list
+								var html = '<option data-value="0">未选择</option>';
+								for (var i = 0; i < list.length; i ++) {
+									html += '<option value="' + list[i].id + '">' + list[i].school + '</option>';
+								}
+								$(SelectSchool.parameter.schoolSelector).html(html);
+							},
+						});
+					}
+				})
+			},
+		});
+	},
+	getProvince: function() {
+	},
+	getSchool: function() {
+
+	},
+}
+
+SelectSchool.init();
 	</script>
 </body>
 {% endblock %}
