@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='customer',
             name='head',
-            field=models.ForeignKey(default=None, verbose_name='\u5934\u50cf', to='customer.Head'),
+            field=models.ForeignKey(default=None, verbose_name='\u5934\u50cf', blank=True, to='customer.Head', null=True,),
         ),
     ]
