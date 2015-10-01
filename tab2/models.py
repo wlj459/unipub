@@ -7,6 +7,7 @@ from customer.models import Customer
 class Category(models.Model):
     name = models.CharField(u'类型', max_length=100)
     url = models.CharField(u'广告链接', max_length=300)
+    message = models.CharField(u'公告', max_length=500, default='')
 
     class Meta:
         verbose_name = u'类型'
