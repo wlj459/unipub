@@ -312,7 +312,7 @@ def get_school(requests):
                 status = '1'
                 lists = []
                 return dumps({'list': lists, 'status': status})
-            lists = School.objects.filter(province=province)
+            lists = School.objects.filter(province=province).order_by('-id')
             schools = []
             for i in lists:
                 schools.append({'id': i.id, 'school': i.name})
