@@ -56,11 +56,9 @@
 					省份：
 				</label>
 				<select id="form-province" name="province">
-					<option data-value="0">
-						未选择(选择省份有助于快速查找学校)
-					</option>
 				</select>
 			</div>
+			<p class="form-hint">*选择省份有助于快速查找学校</p>
 		</div>
 		<div class="form-group">
 			<div class="form-selector">
@@ -68,11 +66,9 @@
 					学校：
 				</label>
 				<select id="form-school" name="school">
-					<option data-value="0">
-						未选择(选择即送50个积分)
-					</option>
 				</select>
 			</div>
+			<p class="form-hint">*选择即送50个积分</p>
 		</div>
 		<div class="form-group">
 			<div class="form-userphoto">
@@ -134,46 +130,48 @@ var SelectSchool = {
 				var list = json.list
 				var html = '';
 				for (var i = 0; i < list.length; i ++) {
-					html += '<option value="' + list[i].id + '">' + list[i].province + '</option>';
+					if (list[i].province === '湖北' || list[i].province === '湖北省') {
+						html += '<option value="' + list[i].id + '" selected="selected">' + list[i].province + '</option>';
+					} else {
+						html += '<option value="' + list[i].id + '">' + list[i].province + '</option>';
+					}
 				}
 				$(SelectSchool.parameter.provinceSelector).append(html);
 
-				$(SelectSchool.parameter.provinceSelector).change(function () {
-					var value = $(this).select().val();
-					console.log(value);
-					if (value === '0') {
-						$(SelectSchool.parameter.schoolSelector).html('<option data-value="0">未选择</option>')
-					} else {
-						$.ajax({
-							method: 'get',
-							url: '/school/get/school',
-							data: {
-								'province': value,
-							},
-							dataType: 'json',
-							success: function(json) {
-								console.log(json);
-								if (json.status !== '0') {
-									console.log('error', json.status);
-									return false;
-								}
-								var list = json.list
-								var html = '<option data-value="0">未选择</option>';
-								for (var i = 0; i < list.length; i ++) {
-									html += '<option value="' + list[i].id + '">' + list[i].school + '</option>';
-								}
-								$(SelectSchool.parameter.schoolSelector).html(html);
-							},
-						});
-					}
-				})
+				$(SelectSchool.parameter.provinceSelector).change(SelectSchool.getSchool);
+
+				SelectSchool.getSchool();
 			},
 		});
 	},
 	getProvince: function() {
 	},
 	getSchool: function() {
-
+		var value = $(SelectSchool.parameter.provinceSelector).select().val();
+		$.ajax({
+			method: 'get',
+			url: '/school/get/school',
+			data: {
+				'province': value,
+			},
+			dataType: 'json',
+			success: function(json) {
+				if (json.status !== '0') {
+					console.log('error', json.status);
+					return false;
+				}
+				var list = json.list
+				var html = '';
+				for (var i = 0; i < list.length; i ++) {
+					if (list[i].school === '武汉大学') {
+						html += '<option value="' + list[i].id + '" selected="selected">' + list[i].school + '</option>';
+					} else {
+						html += '<option value="' + list[i].id + '">' + list[i].school + '</option>';
+					}
+				}
+				$(SelectSchool.parameter.schoolSelector).html(html);
+			},
+		});
 	},
 }
 
