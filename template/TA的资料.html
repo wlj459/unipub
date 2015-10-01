@@ -55,10 +55,13 @@
 			</div>
 			<div class="form-group">
 				<div class="form-textarea">
-					<label for="form-intro">
-
-					</label>
-					<p>{{customer.introduction}}</p>
+					<p>
+						{% if user.introduction %}
+						{{user.introduction}}
+						{% else %}
+						暂无个人简介
+						{% endif %}
+					</p>
 				</div>
 			</div>
 		</div>
