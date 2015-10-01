@@ -172,6 +172,12 @@ body.green {
 	margin: 20px 0;
 }
 
+.course-message {
+	margin-top: -8px;
+	margin-bottom: 12px;
+	font-size: 14px;
+}
+
 .course-list {
 	margin: 0 -6px;
 }
