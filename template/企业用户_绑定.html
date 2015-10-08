@@ -9,7 +9,6 @@
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/userphoto.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -68,14 +67,19 @@
 		</div>
 		<div class="form-group">
 			<div class="form-userphoto">
-				<ul class="form-userphoto-data" style="display:none">
+				<p>
+					头像：
+				</p>
+				<ul class="form-userphoto-radios">
 					{% for item in list %}
-					<li data-value="{{item.id}}" data-url="{{item.url}}"></li>
+					<li>
+						<input id="userphoto{{ forloop.counter }}" {% if forloop.first %}checked="checked" {% endif %}type="radio" name="userphoto" value="{{item.id}}">
+						<label for="userphoto{{ forloop.counter }}">
+							<img class="form-userphoto-img" src="{{item.url}}">
+						</label>
+					</li>
 					{% endfor %}
 				</ul>
-				<img class="form-userphoto-img" src="">
-				<input id="form-userphoto" type="hidden" name="userphoto" value="">
-				<button class="form-userphoto-btn btn">修改头像</button>
 			</div>
 		</div>
 		<input type="hidden" name="open_id" value="{{open_id}}">
@@ -107,8 +111,6 @@ MyForm.init({
 		'hintTitle': '企业介绍',
 	}
 });
-
-UserPhoto.init();
 	</script>
 </body>
 {% endblock %}

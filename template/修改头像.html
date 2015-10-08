@@ -6,29 +6,10 @@
 修改头像
 {% endblock %}
 
-{% block js %}
-<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/userphoto.js' %}"></script>
-{% endblock %}
-
 {% block css %}
 <style type="text/css">
-.editphoto-img {
-	margin: 0 -6px;
-}
-
-.editphoto-img img {
-	width: 100%
-}
-
 .editphoto-btns {
 	margin-top: 16px;
-}
-
-.editphoto-ajax {
-	margin-top: 6px;
-	margin-bottom: 6px;
-	background-color: #bba76a;
 }
 </style>
 {% endblock %}
@@ -37,29 +18,23 @@
 <body class="white">
 	<div class="wrapper">
 		<form action="/customer/change/head" method="post">
-			<ul class="editphoto-data" style="display:none">
-				{% for item in list %}
-				<li data-value="{{item.id}}" data-url="{{item.url}}"></li>
-				{% endfor %}
-			</ul>				
-			<div class="editphoto-img">
-				<img src="">
-				<input id="editphoto-value" type="hidden" name="userphoto" value="">
-			</div>
 			<input type="hidden" name="open_id" value="{{user.open_id}}">
+			<div class="form-userphoto">
+				<ul class="form-userphoto-radios">
+					{% for item in list %}
+					<li>
+						<input id="userphoto{{ forloop.counter }}" type="radio" name="userphoto" value="{{item.id}}">
+						<label for="userphoto{{ forloop.counter }}">
+							<img class="form-userphoto-img" src="{{item.url}}">
+						</label>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
 			<div class="editphoto-btns">
-				<button class="editphoto-ajax btn">修改头像</button>
 				<button class="btn" type="submit">保存</button>
 			</div>
 		</form>
 	</div>
 </body>
-<script type="text/javascript">
-UserPhoto.init({
-	dataSelector: '.editphoto-data',
-	imageSelector: '.editphoto-img img',
-	buttonSelector: '.editphoto-ajax',
-	inputSelector: '#editphoto-value',
-});
-</script>
 {% endblock %}

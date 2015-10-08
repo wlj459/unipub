@@ -121,27 +121,47 @@ body.green {
 	margin-top: 36px;
 }
 
-.form-userphoto {
-	position: relative;
-	width: 300px;
-	height: 150px;
+.form-userphoto > p {
+	padding: 10px 12px;
+	color: #a0a0a0;
+}
+
+
+@media screen and (min-width: 360px) {
+	.form-userphoto-radios {
+		overflow: hidden;
+		width: 340px;
+		height: 136px;
+	}
+}
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+	.form-userphoto-radios {
+		overflow: hidden;
+		width: 300px;
+		height: 120px;
+	}
+}
+
+.form-userphoto-radios > li {
+	float: left;
+	width: 20%;
+	height: 50%;
+	padding: 3px; 
+}
+
+.form-userphoto-radios input {
+	display: none;
 }
 
 .form-userphoto-img {
-	position: absolute;
-	left: 0;
-	width: 150px;
-	height: 150px;
+	height: 100%;
+	width: 100%;
 }
 
-.form-userphoto-btn.btn {
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	height: 44px;
-	margin: auto 0;
-	width: 120px;
+.form-userphoto-radios input:checked + label .form-userphoto-img {
+	outline: 2px solid #438a7b;
+	outline-offset: -2px;
 }
 
 .intro p {
