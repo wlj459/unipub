@@ -26,7 +26,8 @@ class Article(models.Model):
     content = models.TextField(u'正文')
     clicks = models.IntegerField(u'点击次数', default=0)
     summary = models.CharField(u'文章简介', max_length=300)
-    ad = models.CharField(u'广告连接', max_length=300, default='http://7xl7bo.com1.z0.glb.clouddn.com/logo.png')
+    ad_1 = models.CharField(u'上部广告连接', max_length=300, default='http://7xl7bo.com1.z0.glb.clouddn.com/logo.png')
+    ad_2 = models.CharField(u'下部广告连接', max_length=300, default='http://7xl7bo.com1.z0.glb.clouddn.com/logo.png')
 
     class Meta:
         ordering = ['-published']
