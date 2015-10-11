@@ -1,10 +1,12 @@
 {% load staticfiles %}
 {% for comment in comments %}
 <li>
+	<div class="user">
 	<div class="user-photo">
 		<a href="/customer/get/intro?id={{comment.author.id}}&open_id={{user.open_id}}">
 			<img src="{{comment.author.head.url}}">
 		</a>
+		</div>
 	</div>
 	<div class="course-comment-right">
 		<p class="user-info">
