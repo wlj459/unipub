@@ -195,4 +195,5 @@ def get_comment(requests):
             lastPage = True
 
         return render_to_response('page-公共课评论.html',
-                                  dict(comments=comments_list, page_num=min(page_num + 1, num), lastPage=lastPage))
+                                  dict(comments=comments_list, page_num=min(page_num + 1, num), lastPage=lastPage,
+                                       user=user))
