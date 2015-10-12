@@ -164,6 +164,8 @@ def create(requests):
             is_send=True,
         )
         article.save()
+        user.integral += 5
+        user.save()
         return HttpResponseRedirect(
             'news/get?id=' + str(article.id) + '&open_id=' + str(open_id) + '&category=' + str(article.category.id))
 

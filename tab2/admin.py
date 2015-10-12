@@ -19,5 +19,11 @@ class ArticleAdmin(admin.ModelAdmin):  # 文章类admin后台显示以及tinymce
         )
 
 
+class CommentAdmin(admin.ModelAdmin):  # 文章类admin后台显示以及tinymce
+    list_display = ('author', 'article', 'published', )
+    fields = ('author', 'article', 'comment')
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Category)
+admin.site.register(Comment, CommentAdmin)

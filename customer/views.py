@@ -25,7 +25,6 @@ def bind(requests):
         if school_id is not None and len(school_id) != 0:
             try:
                 school = School.objects.get(id=school_id)
-                integral = 250
             except ObjectDoesNotExist:
                 school = None
         else:

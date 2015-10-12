@@ -49,7 +49,7 @@ class Customer(models.Model):
     permission = models.BooleanField(u"是否审核", default=False)
     type = models.BooleanField(u"是否是企业用户", default=False)
     open_id = models.CharField(u'OpenID', max_length=100)
-    integral = models.IntegerField(u'积分', default=50)
+    integral = models.IntegerField(u'积分', default=200)
 
     class Meta:
         verbose_name = u'用户'
