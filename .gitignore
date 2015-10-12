@@ -2,3 +2,4 @@
 *.py~
 *.html~
 db.sqlite3
+Thumbs.db
