@@ -51,7 +51,7 @@ def contact_us(requests):
             email=requests.POST['email'],
             phone_num=requests.POST['phone_num'],
             message=requests.POST['message'],
-            user=user,
+            customer=user,
         ).save()
 
         return render_to_response('success.html', "success")
