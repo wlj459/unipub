@@ -33,7 +33,7 @@ def get_book(requests):
 
 def contact_us(requests):
     if requests.method == 'GET':
-        return render_to_response('留言板B.html')
+        return render_to_response('留言板B.html', {"open_id": requests.GET['open_id']})
     else:
         open_id = ''
         try:

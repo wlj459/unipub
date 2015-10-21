@@ -44,4 +44,4 @@ class ContactUs(models.Model):
         verbose_name_plural = u'来信'
 
     def __unicode__(self):
-        return u'%s' % self.email
+        return u'%s' % self.customer.name
