@@ -317,6 +317,11 @@ body.green {
 	height: 40px;
 }
 
+.course-comment .user-photo img {
+	width: 40px;
+	height: 40px;
+}
+
 .course-comment .user-info {
 	margin-left: 0;
 	padding-top: 0;
