@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from django.db import models
+from customer.models import Customer
 
 # Create your models here.
 
@@ -36,6 +37,7 @@ class ContactUs(models.Model):
     phone_num = models.CharField(u'电话', max_length=300)
     email = models.CharField(u'邮箱', max_length=300)
     message = models.CharField(u'留言', max_length=1000)
+    customer = models.ForeignKey(Customer, verbose_name=u'用户', default=None, blank=True)
 
     class Meta:
         verbose_name = u'来信'

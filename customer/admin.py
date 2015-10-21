@@ -5,6 +5,7 @@ from models import Customer, Head, School, Province
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('name', 'integral', 'permission', 'type')
+    search_fields = ('name', )
 
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Head)

@@ -120,11 +120,12 @@ def get_customer_info(requests):
         if int(user.id) == int(customer_id):
             return render_to_response('我的资料.html', {'user': user})
         else:
-            try:
-                customer = Customer.objects.get(id=customer_id)
-                return render_to_response('TA的资料.html', {'customer': customer, 'user': user})
-            except ObjectDoesNotExist:
-                return render_to_response('error.html')
+            # try:
+            #     customer = Customer.objects.get(id=customer_id)
+            #     return render_to_response('TA的资料.html', {'customer': customer, 'user': user})
+            # except ObjectDoesNotExist:
+            #     return render_to_response('error.html')
+            pass
     else:
         return render_to_response('error.html')
 
@@ -279,6 +280,8 @@ def delete(requests):
         try:
             article = Article.objects.get(id=delete_id)
             article.delete()
+            user.integral -= 5
+            user.save()
             return HttpResponseRedirect('/customer/get/articles?id=' + str(user.id) + '&open_id=' + str(user.open_id))
         except ObjectDoesNotExist:
             return render_to_response('error.html')
