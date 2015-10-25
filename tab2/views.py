@@ -136,8 +136,9 @@ def comment(requests):
 
 def create(requests):
     if requests.method == 'GET':
+        category = Category.objects.get(id=requests.GET['category'])
         return render_to_response('新建主题.html',
-                                  {'open_id': requests.GET['open_id'], 'category': requests.GET['category']})
+                                  {'open_id': requests.GET['open_id'], 'category':category })
     else:
         open_id = requests.POST['open_id']
         try:
