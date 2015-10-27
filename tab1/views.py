@@ -27,6 +27,7 @@ def get_book(requests):
         GetBook.objects.create(
             email=requests.POST['email'],
             phone_num=requests.POST['phone_num'],
+            remark=requests.POST['remark']
         ).save()
         return render_to_response('success.html', "success")
 
