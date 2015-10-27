@@ -24,7 +24,7 @@ class Business (models.Model):
 class GetBook(models.Model):
     email = models.CharField(u'邮箱', max_length=300)
     phone_num = models.CharField(u'电话', max_length=300)
-    remark = models.CharField(u'刊物', max_length=500, blank=True, null=True)
+    remark = models.CharField(u'订阅内容', max_length=500, blank=True, null=True)
 
     class Meta:
         verbose_name = u'订阅'
@@ -37,7 +37,7 @@ class GetBook(models.Model):
 class ContactUs(models.Model):
     phone_num = models.CharField(u'电话', max_length=300)
     email = models.CharField(u'邮箱', max_length=300)
-    message = models.CharField(u'留言', max_length=1000)
+    message = models.TextField(u'留言')
     customer = models.ForeignKey(Customer, verbose_name=u'用户', default=None, blank=True, null=True)
 
     class Meta:

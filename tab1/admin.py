@@ -11,7 +11,7 @@ class SearchAdmin(admin.ModelAdmin):
 
 class EmailAdmin(admin.ModelAdmin):
     search_fields = ('email', )
-    list_display = ('email', 'phone_num', 'remark')
+    list_display = ('email', 'phone_num', )
 admin.site.register(Business)
 admin.site.register(ContactUs, SearchAdmin)
 admin.site.register(GetBook, EmailAdmin)
