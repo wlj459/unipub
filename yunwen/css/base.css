@@ -8,11 +8,11 @@ body {
 }
 
 body.white {
-	background-color: #fafcf1;
+	background-color: #fff;
 }
 
 body.green {
-	background-color: #438a7b;
+	background-image: url(../img/background-yellow@width=360.png);
 }
 
 .wrapper {
